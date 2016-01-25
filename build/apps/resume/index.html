@@ -46,6 +46,10 @@
         <ul class="collection" id="classes">
         </ul>
 
+        <h3>ToDo Tasks for Team Rice and Curry</3>
+        <u1 class="collection" id= "tasks">
+        </u1>
+
       </div>
 
       <script>
@@ -89,7 +93,38 @@
           })
         })
 
-
+      var taskRef = new Firebase('https://weekone.firebaseio.com/')
+      taskRef.child('todos/tasks').on('value', function(snapshot){
+          $('#tasks').empty()
+          var tasks = snapshot
+          tasks.forEach(function(task){
+            var key = task.key();
+            var title = task.child("title").val()
+            var priority = task.child("priority").val();
+            var assigned = task.child("assignedby").val();
+            var deadline = task.child("deadline").val();
+            var type = task.child("type").val();
+            var completed = task.child("completed").val();
+            
+            // Display checkbox according to state of completion
+            if (completed == true) {
+              // use variable id to uniquely differentiate each checkbox
+              var checkboxPosition = '<input checked type="checkbox" onClick="completedCallback(\'' + key + '\')" id=' + key + '>';
+            }
+            else {
+              var checkboxPosition = '<input type="checkbox" onClick="completedCallback(\'' + key + '\')" id=' + key + '>';
+            }
+            // Selct Color based on Priority
+            var cardColor = '<div class="card blue-grey">'
+            if (priority == 'medium') {
+              cardColor = '<div class="card blue-grey darken-2">'
+            }
+            if (priority == 'high') {
+              cardColor = '<div class="card blue-grey darken-4">'
+            }
+            $('#tasks').append('<div class="row">' + '<div class="col s12 m6">' + cardColor + '<div class="card-content white-text">' + '<span class="card-title">' + title + '</span>' + '<p>' + "Priority: " + priority + '<br>' + "Deadline: " + deadline + '<br>' + "Type: " + type + '<br>' + "Assigned To: " + assigned + '</p>' + '</div>' + '<div class="card-action">' + "<div class=\"switch\">" + '<label>' + 'In Progress' + checkboxPosition + '<span class="lever"></span>' + "Completed" + '</label> ' + '</div>' + '</div>' + '</div>' + '</div>' + '</div>')
+          })
+        })
 
       </script>
     </body>
