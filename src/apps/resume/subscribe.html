@@ -16,6 +16,17 @@
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
 
       <div class="container">
+        <nav>
+          <div class="nav-wrapper blue-grey darken-1">
+            <a href="index.html" class="brand-logo right">My Resume</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+              <li><a href="index.html">Home</a></li>
+              <li class="active"><a href="subscribe.html">Subscribers</a></li>
+            </ul>
+          </div>
+        </nav>
+
+        <h6>Author: Brooke Robinson</h6>
 
         <h1> Subscribe </h1>
 
@@ -41,13 +52,38 @@
 
       <script>
 
+       var ref = new Firebase('https://ucddbrobinson.firebaseio.com/')
+       var subscribeListRef = ref.child('subscribers')
+
         $('#submit').click(function(){
           console.log('the submit button is clicked')
+          var valid_email = $("#email").attr('class');
 
+          if (valid_email == "validate valid"){
+            var email = $('#email').val()
+            var new_subscriber = subscribeListRef.push()
+            var subscribeObject = {
+              email: email
+            }
+            new_subscriber.set(subscribeObject)
+            Materialize.toast('Email has been submitted.',1000);
+          }
+          else{
+            Materialize.toast('Invalid email address.', 1000);
+          }
           // TODO: add code to submit an email address to your own Firebase
 
         })
 
+
+        ref.child('subscribers').on('value',function(snapshot){
+          $('#emails').empty()
+          var emails = snapshot
+          emails.forEach(function(subscriber){
+            var email = subscriber.child("email").val()
+            $('#emails').append('<li class="collection-item">' + email + '</li>')
+          })
+        })
 
         // TODO: add code to pull emaill addresses from your own Firebase,
         // and populate "#emails" with these email addresses
