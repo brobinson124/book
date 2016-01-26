@@ -2,7 +2,6 @@
   <html>
     <head>
       <!--Import Google Icon Font-->
-      <!-- Remove firbase.json - create new one within this directory -->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
@@ -16,72 +15,122 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
 
-      <div class="container">
-        <nav>
-          <div class="nav-wrapper blue-grey darken-1">
-            <a href="index.html" class="brand-logo right">Rice and Curry</a>
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-              <li class="active"><a href="index.html">Home</a></li>
-              <li><a href="low.html">Low</a></li>
-              <li><a href="medium.html">Medium</a></li>
+        <nav class = "cyan darken-1">
+          <div class="nav-wrapper container">
+            <a href="/apps/todos/index.html" class="brand-logo">RiceAndCurry ToDo App</a>
+            <ul class="right hide-on-med-and-down">
               <li><a href="high.html">High</a></li>
-              <li><a href="inbox.html">Inbox</a></li>
+              <li><a href="medium.html">Medium</a></li>
+              <li><a href="low.html">Low</a></li>
+              <li class="active"><a href="inbox.html">Inbox</a></li>
             </ul>
           </div>
         </nav>
 
-        <h6>Authors: Caleb Hsu, Sigrunn Sky, Willie Payne, Brooke Robinson, Jesus Tovar</h6>
+      <div class="container">
 
-        <h2>Tasks</h2>
-        <ul class="collection" id="tasks">
-        </ul>
+        <h1> Adding a Task </h1>
 
+        <div class="row">
+          <div class="input-field col s12">
+            <input value="" id="title" type="text" class="validate">
+            <label for="title">Title</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+             <select id="priority">
+               <option value="" disabled selected>Choose Priority</option>
+               <option value="high">High</option>
+               <option value="medium">Medium</option>
+               <option value="low">Low</option>
+             </select>
+             <label>Priority</label>
+           </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+             <select id="type">
+               <option value="" disabled selected>Choose Type</option>
+               <option value="chore">Chore</option>
+               <option value="school">School</option>
+               <option value="personal">Personal</option>
+               <option value ="other">Other</option>
+             </select>
+             <label>Type</label>
+           </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input placeholder="GitHub ID" value="" id="assigned" type="text" class="validate">
+            <label for="assigned">Assigned By</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12">
+            <label for="deadline">Due</label>
+            <input type="date" id="deadline" class="datepicker">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <a class="waves-effect waves-light btn" id="submit">Submit</a>
+          </div>
+        </div>
       </div>
 
       <script>
-        // create a firebase reference to the root
-        var ref = new Firebase('https://weekone.firebaseio.com/')
-        // Callback function - triggered when completion switch toggled
-        function completedCallback(key) {
-          var callbackKey = '#' + key
-          var completedVal = $(callbackKey).prop('checked')
-          Materialize.toast('Task Updated', 1000);
-          ref.child('todos/tasks').child(key).update({
-           completed: completedVal
-          });
-        }
-        // read data from the location todos/tasks
-        ref.child('todos/tasks').on('value', function(snapshot){
-          $('#tasks').empty()
-          var tasks = snapshot
-          tasks.forEach(function(task){
-            var key = task.key();
-            var title = task.child("title").val()
-            var priority = task.child("priority").val();
-            var assigned = task.child("assignedby").val();
-            var deadline = task.child("deadline").val();
-            var type = task.child("type").val();
-            var completed = task.child("completed").val();
-            
-            // Display checkbox according to state of completion
-            if (completed == true) {
-              // use variable id to uniquely differentiate each checkbox
-              var checkboxPosition = '<input checked type="checkbox" onClick="completedCallback(\'' + key + '\')" id=' + key + '>';
-            }
-            else {
-              var checkboxPosition = '<input type="checkbox" onClick="completedCallback(\'' + key + '\')" id=' + key + '>';
-            }
-            // Selct Color based on Priority
-            var cardColor = '<div class="card blue-grey">'
-            if (priority == 'medium') {
-              cardColor = '<div class="card blue-grey darken-2">'
-            }
-            if (priority == 'high') {
-              cardColor = '<div class="card blue-grey darken-4">'
-            }
-            $('#tasks').append('<div class="row">' + '<div class="col s12 m6">' + cardColor + '<div class="card-content white-text">' + '<span class="card-title">' + title + '</span>' + '<p>' + "Priority: " + priority + '<br>' + "Deadline: " + deadline + '<br>' + "Type: " + type + '<br>' + "Assigned To: " + assigned + '</p>' + '</div>' + '<div class="card-action">' + "<div class=\"switch\">" + '<label>' + 'In Progress' + checkboxPosition + '<span class="lever"></span>' + "Completed" + '</label> ' + '</div>' + '</div>' + '</div>' + '</div>' + '</div>')
-          })
+        $('.datepicker').pickadate({
+          selectMonths: true, // Creates a dropdown to control month
+          selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+        var root = new Firebase('https://weekone.firebaseio.com/')
+        var taskListRef = root.child('todos/tasks')
+        $('#submit').click(function(){
+          console.log('the submit button is clicked')
+          // Retrieves fields from form inputs
+          var title = $('#title').val()
+          console.log('the title is', title)
+          var priority = $('#priority').val()
+          console.log('the priority is', priority)
+          var type = $('#type').val()
+          console.log('the type is', type)
+          var deadline = $('#deadline').val()
+          console.log('the deadline is', deadline)
+          var assignedby = $('#assigned').val()
+          console.log('the submitter is', assignedby)
+          var completed = false
+          // Add more fields to taskObject
+          var taskObject = {
+            title: title,
+            priority: priority,
+            type: type,
+            deadline: deadline,
+            assignedby: assignedby,
+            completed: completed,
+          }
+          // TODO: add logic to validate form data before pushing the
+          // data to firebase, only push/set if the required fields are not empty
+          if (title == "" || priority == "" || type == "" || deadline == "" || assignedby == "") {
+             Materialize.toast('Sorry, you are missing a field.', 4000)
+          }
+          else {
+            //Materialize.toast('Submitted!', 4000)
+            var newTaskRef = taskListRef.push()
+            newTaskRef.set(taskObject)
+            window.alert('Your task has been submitted successfully!')
+            location.reload();
+          }
         })
+        // IMPORTANT!! initialize materializecss select
+        $(document).ready(function() {
+          $('select').material_select();
+        });
       </script>
     </body>
   </html>
