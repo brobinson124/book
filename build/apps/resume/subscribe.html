@@ -59,7 +59,9 @@
           console.log('the submit button is clicked')
           var valid_email = $("#email").attr('class');
 
-          if (valid_email == $("#email").attr('class')){
+//TODO Make this valid
+
+          if (valid_email == "correct"){
             var email = $('#email').val()
             var new_subscriber = subscribeListRef.push()
             var subscribeObject = {

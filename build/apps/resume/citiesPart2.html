@@ -8,10 +8,7 @@
 
       <!--Import stylesheet for Leaflet to work-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
-      <link rel="stylesheet" href="../../css/leaflet.label.css" />
-
-      <!-- custom css for the website -->
-      <link rel="stylesheet" type="text/css" href="css/main.css">
+      <link rel="stylesheet" href="/css/leaflet.label.css" />
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,29 +19,33 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>      <script src="../../js/leaflet.label.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+      <script src="/js/leaflet.label.js"></script>
 
-     <nav>
-          <div class="nav-wrapper blue-grey darken-1">
-            <a href="index.html" class="brand-logo right">My Resume</a>
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-              <li class="active"><a href="index.html">Home</a></li>
-              <li><a href="subscribe.html">Subscribers</a></li>
-              <li><a href="cities.html">Cities</a></li>
-            </ul>
-          </div>
-        </nav>
+      <nav>
+        <div class="nav-wrapper light-green darken-2">
+          <ul class="left">
+            <li><a href="/">Home</a></li>
+          </ul>
+          <a href="/apps/resume/" class="brand-logo center">Brookie Cookie</a>
+          <ul class="right">
+            <li class="active"><a href="cities.html"><i class="large material-icons">location_on</i></a></li>
+            <li><a href="subscribe.html"><i class="large material-icons">email</i></a></li>
+          </ul>
+        </div>
+      </nav>
 
       <div class="container">
-      
-        <h1>Brooke's Favorite Cities</h1>
-        <div class="row " id="cities">
-        </div>
 
-        <div id="map" style="height:500px"></div>
+        <h1>Favorite Cities</h1>
+        <div class="row" id="cities">
+        </div>
+        <div id="map" style="height:500px">
+          <canvas id="icon1" width="128" height="128"></canvas>
+        </div>
       </div>
 
-<style>
+ <style>
       html {
         background: url(city_map2.jpg) no-repeat center center fixed; 
         -webkit-background-size: cover;

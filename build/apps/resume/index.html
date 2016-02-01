@@ -22,6 +22,7 @@
             <ul id="nav-mobile" class="left hide-on-med-and-down">
               <li class="active"><a href="index.html">Home</a></li>
               <li><a href="subscribe.html">Subscribers</a></li>
+              <li><a href="cities.html">Cities</a></li>
             </ul>
           </div>
         </nav>
@@ -32,10 +33,12 @@
 
         <h3>Programming Languages</h3>
         <ul class="collection" id="languages">
+        <img src = "cardboard.jpg">
         </ul>
 
         <h3>Clubs</h3>
         <ul class="collection" id="clubs">
+        <img src = "ROTC.jpg">
         </ul>
 
         <h3>Work</h3>
@@ -51,6 +54,17 @@
         </u1>
 
       </div>
+
+
+<style>
+      html {
+        background: url(flatirons2.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    </style>
 
       <script>
 
@@ -73,7 +87,7 @@
           snapshot.forEach(function(task){
             var key = task.key()
             var Position = task.child("Position").val()
-            $('#clubs').append( '<div class="col s12 m6">' + '<div class="card cyan darken-1">' + '<div class="card-content white-text">' + '<span class="card-title">' + key + '</span> <p> Position: ' + Position + '</br>' +'</div>' + '</div>' + '</div>')
+            $('#clubs').append('<div class="col s12 m6">' + '<div class="card cyan darken-1">' + '<div class="card-content white-text">' + '<span class="card-title">' + key + '</span> <p> Position: ' + Position + '</br>' +'</div>' + '</div>' + '</div>')
           })
         })
 
@@ -84,6 +98,7 @@
             $('#Work').append( '<div class="col s12 m6">' + '<div class="card cyan darken-1">' + '<div class="card-content white-text">' + '<span class="card-title">' + key + '</span> <p> Time: ' + Position + '</br>' +'</div>' + '</div>' + '</div>')
           })
         })
+
 
          ref.child('bio/classes').once('value', function(snapshot){
           snapshot.forEach(function(task){
