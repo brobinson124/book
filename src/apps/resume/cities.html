@@ -102,29 +102,38 @@ function mapCity(city, name){
   var cond = city.currently.summary
 
   //show city map
-  var tempMark =  tempMark = 'flag_houston.png'
-  if (name == 'Houston') {tempMark = 'flag_houston.png'}
-  else if (name == "New York") {tempMark = 'flag_newyork.png'}
-  else if (name == "Milwaukee") {tempMark = 'flag_milwakee.jpg'}
-  else if (name == "Denver") {tempMark = 'flag_denver.png'}
-  else {tempMark = 'flag_chicago.png'}
+  var mapMark =  mapMark = 'flag_houston.png'
+  var tempMark = tempMark = 'sun.jpg'
+  if (name == 'Houston') {mapMark = 'flag_houston.png'}
+  else if (name == "New York") {mapMark = 'flag_newyork.png'}
+  else if (name == "Milwaukee") {mapMark = 'flag_milwakee.jpg'}
+  else if (name == "Denver") {mapMark = 'flag_denver.png'}
+  else {mapMark = 'flag_chicago.png'}
 
   var temp = city.currently.temperature
-  // handles weather-icons prefix
-  //if (temp >= 80) { tempMark = 'flag_chicago.png' }
-  //else if (temp >= 60) {  tempMark = 'flag_chicago.png' }
-  //else if (temp >= 40) {  tempMark = 'flag_chicago.png' }
-  //else if (temp >= 20) {  tempMark = 'flag_chicago.png'}
- // else { tempMark = 'flag_houston.png' }
+  // add some weather icons
+  if (temp >= 60) { tempMark = 'sun.jpg' }
+  else if (temp >= 32) {  tempMark = 'sun_cloud.png' }
+  else { tempMark = 'snow.png' }
   var myIcon = L.icon({
       iconUrl: tempMark,
       iconSize: [40, 40],
       iconAnchor: [21, 40],
       popupAnchor: [-3, -76],
-  });
-  var marker = L.marker(latlng, {icon: myIcon} ).bindPopup('<b>' + name + '</b><br > ' + cond + ', ' + temp + '&deg; F').addTo(map);
+  })
+  var mapIcon = L.icon({
+      iconUrl: mapMark,
+      iconSize: [60, 40],
+      iconAnchor: [75, 40],
+      popupAnchor: [-3, -76],
+  })
+
+  var marker = L.marker(latlng, {icon: mapIcon}).bindPopup('<b>' + name + '</b><br > ' + cond + ', ' + temp + '&deg; F').addTo(map);
+  var marker2 = L.marker(latlng, {icon: myIcon}).bindPopup('<b>' + name + '</b><br > ' + cond + ', ' + temp + '&deg; F').addTo(map);
   markersLayerGroup.addLayer(marker)
+  markersLayerGroup.addLayer(marker2)
 }
+
 function displayCity(city, name) {
   var capName = name.charAt(0).toUpperCase() + name.substr(1, name.length)
   if (capName == "Newyork") { capName = "New York City" }
@@ -136,7 +145,7 @@ function displayCity(city, name) {
   var humidity = Math.round(c.humidity * 100)
   var wind = Math.round(c.windSpeed)
   var vis = Math.round(c.visibility)
-  // daily data
+  
   var high = d.data[0].apparentTemperatureMax
   var low = d.data[0].apparentTemperatureMin
   var sum = d.summary
