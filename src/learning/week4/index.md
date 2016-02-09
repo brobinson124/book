@@ -59,18 +59,43 @@ Sunday @ 11:59pm, 2/7/2016
 
 ### Requirements
 
-* [ ] The [_About_](/apps/resume/react/components/about.js) component should be fully implemented.
-  * [ ] Name
-  * [ ] Profile photo
-  * [ ] Major or degree information
-  * [ ] Github link  
-* [ ] The [_Skill List_](/apps/resume/react/components/skill-list.js) component should be fully implemented.
-* [ ] The [_Task List_](/apps/resume/react/components/task-list.js) component should be fully implemented.
-* [ ] The [_City List_](/apps/resume/react/components/city-list.js) component should be fully implemented.
-* [ ] Data used to populate the skill list, task list, and city list should come from
+* [X] The [_About_](/apps/resume/react/components/about.js) component should be fully implemented.
+  * [X] Name
+  * [X] Profile photo
+  * [X] Major or degree information
+  * [X] Github link  
+* [X] The [_Skill List_](/apps/resume/react/components/skill-list.js) component should be fully implemented.
+* [X] The [_Task List_](/apps/resume/react/components/task-list.js) component should be fully implemented.
+* [X] The [_City List_](/apps/resume/react/components/city-list.js) component should be fully implemented.
+* [X] Data used to populate the skill list, task list, and city list should come from
 appropriate Firebase locations.
 
 ### Submission
 
 * __Commit/Push__ your source code to Github.
 * __Deploy__ your resume app to Firebase
+
+
+### Notes 8 FEB
+We jumped into the class
+We are ignoring
+* Performance
+  * Potential slow down
+    * Multiple pages vs having only one page
+  * Network
+    * Loading "all three nodes" (includes programming language)
+    * vs. loading "two nodes" (skeleton) and gather third node from firebase
+      * Which one is faster? Depends on internet speed
+      * Need virtual dump
+* Security
+  * JS straight into HTML
+  * Let anyone write to the FB
+  * No log in (read/access control)
+  * AWS (Amazon web service)
+  * Heroku
+* Build
+* Data import/output
+* Users
+* Organization
+* Accessability
+* Version control
