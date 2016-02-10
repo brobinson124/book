@@ -23,11 +23,13 @@ class MapView extends React.Component {
     // Note: .bind(this) is important for the handler function's 'this'
     // pointer to refer to this MapView instance
 
+    var token = 'pk.eyJ1Ijoibmljb3QiLCJhIjoiY2lqdnkzbGQyMGRqY3VjbTVwbDNyOGcxaiJ9.-tW3kDrfp15nLw82zErsjg'
+    const mapurl = 'https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=' + token
     return  <Map center={this.props.center}
-          zoom={13}
+          zoom={14}
           onLeafletClick={this.handleLeafletClick.bind(this)}>
         <TileLayer
-          url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+          url={mapurl}
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
         {providerElements}
