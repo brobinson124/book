@@ -1,7 +1,7 @@
 class App extends React.Component {
   render(){
     return <div>
-      <MyComponents.NavBar actions={this.props.actions}/>
+      <MyComponents.NavBar user={this.props.data.user} actions={this.props.actions}/>
       <div className="card">
         <MyComponents.User
             user={this.props.data.user}
