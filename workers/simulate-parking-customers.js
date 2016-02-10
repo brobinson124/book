@@ -2,64 +2,75 @@ var _ = require('lodash')
 var random_name = require('node-random-name');
 var Firebase = require('firebase');
 
-// San Francisco
+// Denver
 var city_location = {
-  lat: 37.78,
-  lon: -122.41
+    lat: 39.75,
+    lon: -104.98
 }
 
 var radius = 0.03
+    // simualate a random person entering, staying for a duration, and leaving
+function simulate() {
+    // generate a random person with a random name,
+    // random location, and random duration
+    var name = random_name()
+    var duration = 1 + 5 * Math.random()
+    var lat = city_location.lat + radius * (Math.random() - 0.5) * 2
+    var lon = city_location.lon + radius * (Math.random() - 0.5) * 2
+    var person = {
+            name: name,
+            duration: duration,
+            lat: lat,
+            lon: lon
+        }
+        // simulate this person entering
+    enter(person)
+        // simulate this person leaving after 'duration' seconds
+    setTimeout(function() {
+        leave(person)
+    }, duration * 1000)
+}
 
-// simualate a random person entering, staying for a duration, and leaving
-function simulate(){
+function enter(person) {
+    console.log('enter', person)
+    // Put this person in the Firebase
+    var ref = new Firebase('https://weekfour.firebaseio.com/users')
+    ref.child(person.name).set({
+        lat: person.lat,
+        lon: person.lon,
+        name : person.name
+    });
+}
 
-  // generate a random person with a random name,
-  // random location, and random duration
-  var name = random_name()
-  var duration = 1 + 5 * Math.random()
-  var lat = city_location.lat + radius * (Math.random() - 0.5) * 2
-  var lon = city_location.lon + radius * (Math.random() - 0.5) * 2
-  var person = {
-    name: name,
-    duration: duration,
-    lat: lat,
-    lon: lon
-  }
+function leave(person) {
+    console.log('leave', person)
+    var ref = new Firebase('https://weekfour.firebaseio.com/users')
+    var onComplete = function(error) {
+        if (error) {
+            console.log('Leave Synchronization failed');
+        } else {
+            console.log('Leave Synchronization succeeded');
+        }
+    };
 
-  // simulate this person entering
-  enter(person)
-
-  // simulate this person leaving after 'duration' seconds
-  setTimeout(function(){
-    leave(person)
-  }, duration * 1000)
+    ref.child(person.name).remove(onComplete);
 
 }
 
-function enter(person){
-  console.log('enter', person)
-  // TODO: put this person in the Firebase
-  // var ref = new Firebase('your-firebase-url')
-  // ...
+function clear() {
+    // TODO: remove all people from the Firebase
+    var ref = new Firebase('https://weekfour.firebaseio.com/users')
+    var onComplete = function(error) {
+        if (error) {
+            console.log('Clear Synchronization failed');
+        } else {
+            console.log('Clear Synchronization succeeded');
+        }
+    };
+
+    ref.remove(onComplete)
 }
-
-function leave(person){
-  console.log('leave', person)
-  // TODO: remove this person from the Firebase
-  // var ref = new Firebase('your-firebase-url')
-  // ...
-}
-
-
-function clear(){
-  // TODO: remove all people from the Firebase
-  // var ref = new Firebase('your-firebase-url')
-  // ...
-}
-
-
 // clear the firebase, so that the simulation always starts from no one
 clear()
-
-// run each second
+    // run each second
 setInterval(simulate, 2000)
