@@ -1,5 +1,5 @@
 {
-  "firebase": "WEEKFOUR",
+  "firebase": "weekfour",
   "public": "build",
   "ignore": [
     "firebase.json",
