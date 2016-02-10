@@ -2,10 +2,10 @@ var _ = require('lodash')
 var random_name = require('node-random-name');
 var Firebase = require('firebase');
 
-// San Francisco
+// Denver
 var city_location = {
-  lat: 37.78,
-  lon: -122.41
+    lat: 39.75,
+    lon: -104.98
 }
 
 var radius = 0.03
@@ -36,19 +36,48 @@ function simulate(){
 
 }
 
-function enter(person){
-  console.log('enter', person)
-  // TODO: put this person in the Firebase
-  // var ref = new Firebase('your-firebase-url')
-  // ...
+function enter(person) {
+    console.log('enter', person)
+    // Put this person in the Firebase
+    var ref = new Firebase('https://weekfour.firebaseio.com/providers')
+    ref.child(person.name).set({
+        lat: person.lat,
+        lon: person.lon,
+        name : person.name
+    });
 }
 
-function leave(person){
-  console.log('leave', person)
-  // TODO: remove this person from the Firebase
-  // var ref = new Firebase('your-firebase-url')
-  // ...
+function leave(person) {
+    console.log('leave', person)
+    var ref = new Firebase('https://weekfour.firebaseio.com/providers')
+    var onComplete = function(error) {
+        if (error) {
+            console.log('Leave Synchronization failed');
+        } else {
+            console.log('Leave Synchronization succeeded');
+        }
+    };
+
+    ref.child(person.name).remove(onComplete);
+
 }
+
+function clear() {
+    // TODO: remove all people from the Firebase
+    var ref = new Firebase('https://weekfour.firebaseio.com/providers')
+    var onComplete = function(error) {
+        if (error) {
+            console.log('Clear Synchronization failed');
+        } else {
+            console.log('Clear Synchronization succeeded');
+        }
+    };
+
+    ref.remove(onComplete)
+}
+
+// clear the firebase, so that the simulation always starts from no one
+clear()
 
 // run each second
 setInterval(simulate, 2000)
