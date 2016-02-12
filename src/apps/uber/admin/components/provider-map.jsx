@@ -6,10 +6,10 @@ class ProviderMap extends React.Component {
   	console.log(this.props.providers)
     const providers = this.props.providers
     const providerElements = _.map(providers, function(p,i){
+      p.pos = [p.lat, p.lon]
       return <Marker position={p.pos} key={i}>
         <Popup>
-          <span>{p.username}</span>
-          <span>{p.status}</span>
+          <span>{p.name}</span>
         </Popup>
       </Marker>
     })

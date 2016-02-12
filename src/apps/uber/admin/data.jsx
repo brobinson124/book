@@ -24,7 +24,7 @@ function render(){
 // DATA
 //
 
-var firebaseRef = new Firebase('https://weekfour.firebaseio.com/uber')
+var firebaseRef = new Firebase('https://weekfour.firebaseio.com')
 
 // Real-time Data (load constantly on changes)
 firebaseRef.child('users')

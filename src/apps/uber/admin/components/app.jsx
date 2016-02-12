@@ -9,6 +9,8 @@ class App extends React.Component {
         <MyComponents.ProviderMap providers={this.props.data.providers} center={this.props.data.center}/>
       </div>
       <MyComponents.ProviderList providers={this.props.data.providers}/>
+
+
     </div>;
   }
 }

@@ -6,9 +6,10 @@ class UserMap extends React.Component {
 
     const users = this.props.users
     const userElements = _.map(users, function(p,i){
+      p.pos = [p.lat, p.lon]
       return <Marker position={p.pos} key={i}>
         <Popup>
-          <span>{p.username}</span>
+          <span>{p.name}</span>
         </Popup>
       </Marker>
     })
