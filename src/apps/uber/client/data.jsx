@@ -2,7 +2,8 @@
 var data = {
   center: [39.74, -104.99], // Denver
   providers: [],
-  user: null
+  user: null,
+  needs: []
 }
 
 // a single 'handlers' object that holds all the actions of your entire app
@@ -108,4 +109,39 @@ actions.logout = function(){
 
   }
 
+};
+
+// Add the item if it isn't there, otherwise remove it.
+function swap(item){
+    var index = data.needs.indexOf(item);
+    if (index > -1) {
+        data.needs.splice(index, 1);
+    } else {
+        data.needs.push(item);
+    }
 }
+
+actions.needsGas = function() {
+    swap("gas");
+    render();
+};
+
+actions.needsFluid = function() {
+    swap("fluid");
+    render();
+};
+
+actions.needsJump = function() {
+    swap("jump");
+    render();
+};
+
+actions.needsOil = function() {
+    swap("oil");
+    render();
+};
+
+actions.needsClean = function() {
+    swap("clean");
+    render();
+};
