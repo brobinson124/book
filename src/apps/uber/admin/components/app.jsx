@@ -1,13 +1,9 @@
 class App extends React.Component {
   render(){
     return <div>
-      <div className="card">
-        <MyComponents.UserMap users={this.props.data.users} center={this.props.data.center}/>
-      </div>
+      <MyComponents.UserMap users={this.props.data.users} center={this.props.data.center}/>
       <MyComponents.UserList users={this.props.data.users}/>
-      <div className="card">
-        <MyComponents.ProviderMap providers={this.props.data.providers} center={this.props.data.center}/>
-      </div>
+      <MyComponents.ProviderMap providers={this.props.data.providers} center={this.props.data.center}/>
       <MyComponents.ProviderList providers={this.props.data.providers}/>
 
 
