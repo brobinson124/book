@@ -1,13 +1,25 @@
 const {Map, Marker, CircleMarker, Popup, TileLayer, MapLayer}  = window.ReactLeaflet;
 
-function hasItems(items, needs) {
-    if (items.length != needs.length) {
-        return false;
+function hasItems(provider, needs) {
+    var items = [];
+    if (provider.gas) {
+        items.push("gas");
     }
-    needs = needs.sort();
-    items = items.sort();
-    for (var i = 0; i < items.length; ++i){
-        if (items[i] != needs[i]) return false;
+    if (provider.vacuum) {
+        items.push("clean");
+    }
+    if (provider.winwash) {
+        items.push("fluid");
+    }
+    if (provider.jump) {
+        items.push("jump");
+    }
+    if (provider.airfresh) {
+        items.push("oil");
+    }
+    for (var i = 0; i < needs.length; ++i){
+        const index = items.indexOf(needs[i]);
+        if (index < 0 ) return false;
     }
     return true;
 }
