@@ -6,7 +6,7 @@ var data = {
 }
 
 // a single 'handlers' object that holds all the actions of your entire app
-var actions = {}
+var actions = {};
 
 // the main render() function. call this function whenever the app's UI
 // needs to to re-rendered
@@ -17,21 +17,20 @@ function render(){
         data={data}
         actions={actions}/>,
     $('#app-container').get(0)
-  )
+  );
 }
 
 //
 // DATA
 //
 
-var firebaseRef = new Firebase('https://weekfour.firebaseio.com/uber')
+var firebaseRef = new Firebase('https://weekfour.firebaseio.com');
 
 // Real-time Data (load constantly on changes)
 firebaseRef.child('providers')
   .on('value', function(snapshot){
 
-    data.providers = _.values(snapshot.val())
-
+    data.providers = _.values(snapshot.val());
     render()
 
   })
