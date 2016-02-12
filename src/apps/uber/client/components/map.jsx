@@ -35,12 +35,12 @@ class MapView extends React.Component {
             if (hasItems(p, needs)) {
                 color = "green";
             }
-            return <CircleMarker center={p.pos} key={i} color={color}/>;
+            return <CircleMarker radius={15} center={p.pos} key={i} color={color}/>;
         });
 
         let userElement;
         if (this.props.user){
-            userElement = <CircleMarker radius={20} center={this.props.user.pos}/>;
+            userElement = <CircleMarker radius={15} center={this.props.user.pos}/>;
         } else {
             userElement = '';
         }
@@ -51,7 +51,7 @@ class MapView extends React.Component {
         var token = 'pk.eyJ1Ijoibmljb3QiLCJhIjoiY2lqdnkzbGQyMGRqY3VjbTVwbDNyOGcxaiJ9.-tW3kDrfp15nLw82zErsjg';
         const mapurl = 'https://api.mapbox.com/v4/mapbox.streets/{z}/{x}/{y}.png?access_token=' + token;
         return  <Map center={this.props.center}
-                     zoom={14}
+                     zoom={13}
                      onLeafletClick={this.handleLeafletClick.bind(this)}>
             <TileLayer
                 url={mapurl}
