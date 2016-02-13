@@ -4,7 +4,7 @@ class NavBar extends React.Component {
         return (
             <nav>
                 <div className="nav-wrapper blue-grey darken-1">
-                    <a className="brand-logo center">Refresh Your Ride</a>
+                    <a href="../index.html" className="brand-logo right">Refresh My Ride!</a>
                     <MyComponents.User
                         user={this.props.data.user}
                         loginAction={this.props.actions.login}

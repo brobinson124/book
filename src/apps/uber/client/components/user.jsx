@@ -3,7 +3,7 @@ class User extends React.Component {
     render(){
 
         if (this.props.user){
-            var u = this.props.user.username;
+            var u = this.props.user.name;
             console.log(u);
             // user is authenticated
             return <ul id="nav-mobile" className="left hide-on-med-and-down">

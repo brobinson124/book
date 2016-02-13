@@ -40,6 +40,7 @@ class MapView extends React.Component {
 
         let userElement;
         if (this.props.user){
+            this.props.user.pos = [this.props.user.lat, this.props.user.lon]
             userElement = <CircleMarker radius={15} center={this.props.user.pos}/>;
         } else {
             userElement = '';

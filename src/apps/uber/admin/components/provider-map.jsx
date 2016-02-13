@@ -22,8 +22,7 @@ class ProviderMap extends React.Component {
                      zoom={13}>
             <TileLayer
                 url={mapurl}
-                attribution='&copy; <a href="Mapbox.com">Mapbox</a>'
-        />
+                attribution='&copy; <a href="Mapbox.com">Mapbox</a>'/>
         {providerElements}
         </Map>;
   }

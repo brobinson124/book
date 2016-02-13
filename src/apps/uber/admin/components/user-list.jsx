@@ -1,18 +1,8 @@
 
-
-
-
 MyComponents.User = React.createClass({
  render: function() {
-
-   var vals = [];
-   
-
    return (
-
          <p>{this.props.user.name}</p>
-
-
    );
  }
 });
@@ -26,10 +16,10 @@ MyComponents.UserList = React.createClass({
     })
 
     return (
-      <ul className="collection with-header">
-        <li className="collection-header"><h4>Clients</h4></li>
-        {users}
-      </ul>
+      <div>
+      	<h3>Clients</h3>
+        	{users}
+      </div>
     );
   }
 });

@@ -24,8 +24,7 @@ class UserMap extends React.Component {
                      zoom={13}>
             <TileLayer
                 url={mapurl}
-                attribution='&copy; <a href="Mapbox.com">Mapbox</a>'
-        />
+                attribution='&copy; <a href="Mapbox.com">Mapbox</a>'/>
         {userElements}
         </Map>;
   }
