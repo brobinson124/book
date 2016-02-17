@@ -134,3 +134,19 @@ function clear() {
 clear();
 // run each second
 setInterval(simulate, 2000);
+
+
+function logout() {
+    var ref = new Firebase('https://weekfour.firebaseio.com/users');
+    ref.once("value", function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            var key = childSnapshot.key();
+            u = ref.child(key);
+            if ((Date.now() - u.lastActive) > 10 * 60 * 1000) {
+                u.set('status', 'offline');
+            }
+        });
+    });
+}
+// Logout inactive users every ten seconds
+setInterval(logout, 10000);
