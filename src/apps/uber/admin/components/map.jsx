@@ -6,17 +6,19 @@ class MapView extends React.Component {
 
     const users = this.props.users
     const userElements = _.map(users, function(p,i){
-      p.pos = [p.lat, p.lon]
-      return <CircleMarker radius={15} center={p.pos} key={i} color={'blue'}>
-        <Popup>
-          <span>{p.name}</span>
-        </Popup>
-      </CircleMarker>
+      if (p.status === "online"){
+        console.log(p.status)
+        p.pos = [p.lat, p.lon]
+        return <CircleMarker radius={15} center={p.pos} key={i} color={'blue'}>
+          <Popup>
+            <span>{p.name}</span>
+          </Popup>
+        </CircleMarker>
+      }
     });
 
     const providers = this.props.providers
     const providerElements = _.map(providers, function(p,i){
-      console.log('provider')
       p.pos = [p.lat, p.lon]
       return <CircleMarker radius={15} center={p.pos} key={i} color={'green'}>
         <Popup>

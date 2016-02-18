@@ -19,7 +19,7 @@ layout: layout.hbs
 ### Jacob:
 * Update providers, make them move a little less
 
-### Dominic:
+### Nico:
 * Persistant login
 * User logout
 * Update if user is active or not
