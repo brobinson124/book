@@ -50,8 +50,9 @@ firebaseRef.child('providers')
 actions.setUserLocation = function(latlng){
 
   if (data.user){
-    var u = firebaseRef.child('users').child(data.user.username);
-    u.child('pos').set([latlng.lat, latlng.lng]);
+    var u = firebaseRef.child('users').child(data.user.name);
+    u.child('lat').set(latlng.lat);
+    u.child('lon').set(latlng.lng);
     u.child('lastActive').set(Date.now());
   }
 }
