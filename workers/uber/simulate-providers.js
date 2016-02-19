@@ -76,12 +76,17 @@ function movement() {
             var childKey = childSnapshot.key();
             console.log(provider);
 
-            var latmov = Math.random() * (0.001).toFixed(4);
-            latmov *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+            var latmov = 0;
+            var lonmov = 0;
 
-            var lonmov = Math.random() * (0.001).toFixed(4);
-            lonmov *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
-
+            if (Math.random() < 0.5) {
+                latmov = Math.random() * (0.0005).toFixed(4);
+                latmov *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+            } else {
+                lonmov = Math.random() * (0.0005).toFixed(4);
+                lonmov *= Math.floor(Math.random() * 2) == 1 ? 1 : -1;
+            };
+           
             var lat = latmov + provider.lat;
             var lon = lonmov + provider.lon;
 
