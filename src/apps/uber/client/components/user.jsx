@@ -6,14 +6,18 @@ class User extends React.Component {
             var u = this.props.user.name;
             // user is authenticated
             return <ul id="nav-mobile" className="right">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="../index.html">Home</a></li>
                 <li><a href={"https://github.com/" + u}>{u}</a></li>
                 <li><a className="right" href="#" onClick={this.props.logoutAction}>Logout</a></li>
+                <li class ="active"><a href="index.html">Map</a></li>
+                <li><a href="../admin/index.html">Current Providers</a></li>
             </ul>;
         } else {
             return <ul id="nav-mobile" className="left hide-on-med-and-down">
-                <li><a href="/">Home</a></li>
+                <li><a href="../index.html">Home</a></li>
                 <li><a href="#" onClick={this.props.loginAction}>Login</a></li>
+                <li class ="active"><a href="index.html">Map</a></li>
+                <li><a href="../admin/index.html">Current Providers</a></li>
             </ul>;
         }
     }
