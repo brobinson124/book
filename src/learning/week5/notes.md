@@ -25,4 +25,11 @@ Notes
 	* Firebase pushes the update to the client
 	* Can work as a server (we can host our template)
 		* github can also serve, but it is static
+
+
+### Individual Notes
+
+* Divide everyone into cells
+* Data Models
+	
 		
