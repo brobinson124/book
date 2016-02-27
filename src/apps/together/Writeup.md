@@ -10,4 +10,4 @@ layout: layout.hbs
 
 ## How we are going to do it
 
-* We are going to use techniques from class and use realtime updating. 
+* We are going to use techniques from class and use realtime updating. We will use Firebase to keep track of the active users. The music notes will be stored in Firebase as well, and when they are edited they will be updated realtime to every user's screen. We will also keep track of active users. 
