@@ -26,8 +26,7 @@
       MyComponents = {}
     </script>
 
-    <div>
-      <style>
+    <style>
       html {
         background: url(Free_Parking.jpg) no-repeat center center fixed; 
         -webkit-background-size: cover;
@@ -36,38 +35,48 @@
         background-size: cover;
     }
     </style>
-    <div class="container">
-    <h1 style="color:white">Home</h1>
-    <p style="color:white">Use the Garages and Garages Map to find more information!</p>
-    <div>
-      <a class="waves-effect waves-light btn-large center" href="garages.html">List of Garages</a>
-      <a class="waves-effect waves-light btn-large center" href="team.html ">Members</a>
-    </div>
-  </div>
+
     <!-- import each component class in components/ -->
 
-    <script type="text/babel" src="components/navbar.js"></script>
-    <script type="text/babel" src="components/team.js"></script>
+    <!--<script type="text/babel" src="components/navbar.js"></script>
+    <script type="text/babel" src="components/team.js"></script>-->
 
     <!-- The order is important. Dependencies must be loaded first -->
-<!-- 
+    <script type="text/babel" src="components/navbar.js"></script>
+    
     <script type="text/babel" src="components/garage-spaces.js"></script>
     <script type="text/babel" src="components/garage-rates.js"></script>
     <script type="text/babel" src="components/garage-hours.js"></script>
     <script type="text/babel" src="components/garage-title.js"></script>
     <script type="text/babel" src="components/garage.js"></script>
-    --> 
+<!-- 
     <script type="text/babel" src="components/all.js"></script>
 
+ -->
     <!-- render react components -->
     <script type="text/babel">
 
+
+      var GARAGE_NAME = 'Golden Gateway Garage'
+
+      var garage = {name: 'something'}
+
+      // make a jQuery call to load the garages data
+      $.ajax({dataType: "json",url:'garages.snapshot.json'})
+        .success(function(garages) {
+            ReactDOM.render(
+            <MyComponents.Garage garage={garages['Golden Gateway Garage']}/>,
+            //<MyComponents.Garage garages={garages}/>,
+            $('#garage').get(0)
+          )
+
+        }).error( function(XMLHttpRequest, textStatus, errorThrown) { 
+        console.log("Status: " + textStatus); console.log("Error: " + errorThrown)}) 
+        
       ReactDOM.render(
         <MyComponents.NavBar/>,
         $('#navbar').get(0)
       );
-
-      
     </script>
   </body>
 </html>
