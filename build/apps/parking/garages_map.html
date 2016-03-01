@@ -7,8 +7,8 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 
       <!--Import stylesheet for Leaflet to work-->
-      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" />
-      <link rel="stylesheet" href="/css/leaflet.label.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
+      <link rel="stylesheet" href="../../css/leaflet.label.css" />
 
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -19,17 +19,45 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
-      <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
-      <script src="/js/leaflet.label.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+      <script src="../../js/leaflet.label.js"></script>
 
       <div class="container">
 
+
+        <nav>
+          <div class="nav-wrapper blue-grey darken-1">
+            <a href="index.html" class="brand-logo right">Parking Project</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+              <li><a href="index.html">Home</a></li>
+              <li ><a href="garages.html">Garages</a></li>
+              <li class="active"><a href="garages_map.html">Garages Map</a></li>
+            </ul>
+          </div>
+        </nav>
         <h1>Garages Map</h1>
         <div id="map" style="height:500px"></div>
-
+        <div class = "row">
+          <div class ="col s6">
+            <h2>Information at a glance</h2>
+            <h5><div style="font-weight:bold">Open Spots:</div> <div id="Total">Loading...</div></h5>
+            <h5><div style="font-weight:bold">Most Open Lot:</div><div id="Largest">Loading...</div></h5>
+            <h5><div style="font-weight:bold">Least Open Lot:</div><div id="Smallest">Loading...</div></h5>
+            <h5><div style="font-weight:bold">Most Expensive Lot:</div><div id="Expensive">Loading...</div></h5>
+            <h5><div style="font-weight:bold">Cheapest Lot:</div><div id="Cheapest">Loading...</div></h5>
+          </div>
+          <div class ="col s6">
+            <h2>Graph Legend</h2>
+            <h5><div style="font-weight:bold">Available Spots:</div> Indicated by circle size</h5>
+            <h5><div style="font-weight:bold">Cost:</div> Indicated by color scale(green = low, red = high)</h5>
+          </div>
+        </div>
       </div>
 
       <script>
+
+// Create a date for today
+var today = new Date();
 
 // create a firebase reference to the root
 var ref = new Firebase('https://publicdata-parking.firebaseio.com');
@@ -37,15 +65,21 @@ var ref = new Firebase('https://publicdata-parking.firebaseio.com');
 var data
 
 // read data from the location san_francisco/garages, only once
-ref.child('san_francisco/garages').once('value', function(snapshot){
+ref.child('san_francisco/garages').on('value', function(snapshot){
   data = snapshot.val()
-  console.log('data is loaded', data)
-
   var garages = _.filter(data, function(d){
       return _.has(d, 'open_spaces')
   })
 
   drawGarages(garages)
+})
+
+
+var transitRef = new Firebase('https://publicdata-transit.firebaseio.com/sf-muni');
+
+transitRef.child('vehicles').on('value', function(snapshot){
+  transit = snapshot.val()
+  drawBuses(transit)
 })
 
 var attributionText = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a       href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
@@ -64,29 +98,260 @@ var markersLayerGroup = L.layerGroup()
 // add the makers layer group to the map
 markersLayerGroup.addTo(map)
 
+
+var transitLayerGroup = L.layerGroup()
+transitLayerGroup.addTo(map)
+
+// create a layer group to hold all the markers
+var customerLayerGroup = L.layerGroup()
+// add the makers layer group to the map
+customerLayerGroup.addTo(map)
+
+
+function drawBuses(transit){
+  transitLayerGroup.clearLayers()
+
+  var busMark = "bus.png"
+  var trainMark = "train.png"
+  var transitMarkerBus = L.Icon.Default.extend({
+      options: {
+      iconUrl: busMark,
+      shadowSize: [0,0]
+    }
+  })
+  var transitMarkerTrain = L.Icon.Default.extend({
+      options: {
+      iconUrl: trainMark,
+      shadowSize: [0,0]
+    }
+  })
+    _.forEach(transit, function(tran) {
+    // Artificially reduced count so that computer's don't explode. 
+    if (tran.id%10 == 0)
+    {
+      var buses = tran.id
+      var lat = tran.lat
+      var lon = tran.lon
+      var latlon = [lat, lon]
+      var speed = tran.speedKmHr
+      var type = tran.vtype
+
+      if (type == "bus"){
+        var transitIcon = new transitMarkerBus();
+      }
+      else
+      {
+        var transitIcon = new transitMarkerTrain();
+      }
+
+      L.marker(latlon, {icon:transitIcon}).bindPopup('<b>' + buses + '</b><br > ' + speed + ', ' + type).addTo(transitLayerGroup)
+    }
+    })
+}
+
+    
+  
+
+
+
+
+
+
+// parseTime Courtesy of stack overflow: http://stackoverflow.com/questions/141348/what-is-the-best-way-to-parse-a-time-into-a-date-object-from-user-input-in-javas
+function parseTime(timeString) {
+    if (timeString == '' || timeString == undefined) return null;
+
+    var time = timeString.match(/(\d+)(:(\d\d))?\s*(p?)/i); 
+    if (time == null) return null;
+
+    var hours = parseInt(time[1],10);    
+    if (hours == 12 && !time[4]) {
+          hours = 0;
+    }
+    else {
+        hours += (hours < 12 && time[4])? 12 : 0;
+    }   
+    var d = new Date();             
+    d.setHours(hours);
+    d.setMinutes(parseInt(time[3],10) || 0);
+    d.setSeconds(0, 0);  
+    return d;
+}
+
+// Used to extract the rate based on current time. 
+function getRate(rates){
+  var returnRate = 999
+  var currentTime = new Date(); 
+  var d = new Date();
+  var hour = d.getHours();
+  _.some(rates, function(rate){
+    
+    if (_.has(rate,'BEG') && _.has(rate,'END')) 
+    {
+      var beg = parseTime(rate.BEG)
+      var end = parseTime(rate.END)
+      //var end2 = new Date()
+      //end.setSeconds(end.getSeconds())
+      //console.log(end2)
+      //console.log("[" + rate.END + "]")
+      //console.log("Current:" + currentTime + "beg:" + beg + "end:" + end)
+      if ((currentTime > beg && currentTime < end) || (currentTime > beg && (rate.END == "12:00 AM")))
+      {
+        //console.log("matched")
+        returnRate = rate.RATE
+        return rate
+      }
+    }
+  })
+  return returnRate
+}
+
 // visualize garages on a map
 function drawGarages(garages){
 
   // clear all existing markers (if any)
   markersLayerGroup.clearLayers()
 
+  var minCapacity = Number.MAX_VALUE; 
+  var maxCapacity = Number.MIN_VALUE;
+  var minCost = Number.MAX_VALUE; 
+  var maxCost = Number.MIN_VALUE;
+  var totalSpots = 0;  
+  var garageCount = 0; 
+
+  // Reduce and Map to get the spot information using LoDash. #PPL #GETONMYLEVEL #DefinitelyNotTheMostEfficientWayToDoThis
+
+  var biggestSpot = _.reduce(garages, function(prev,cur) {
+    return Number(prev.open_spaces) > Number(cur.open_spaces) ? prev : cur
+  },{friendlyName:"null",open_spaces:-10})
+  maxCapacity = Number(biggestSpot.open_spaces)
+  
+  var smallestLot = _.reduce(garages, function(prev,cur) {
+    return Number(prev.open_spaces) < Number(cur.open_spaces) ? prev : cur
+  },{friendlyName:"null",open_spaces:100000})
+  minCapacity = Number(smallestLot.open_spaces)
+
+  var costliestLot = _.reduce(garages, function(prev,cur) {
+    return getRate(prev.rates) > getRate(cur.rates) ? prev : cur
+  },garages[0])
+  maxCost = getRate(costliestLot.rates)
+  
+  var cheapestLot = _.reduce(garages, function(prev,cur) {
+    return getRate(prev.rates) < getRate(cur.rates) ? prev : cur
+  },garages[0])
+  minCost = getRate(cheapestLot.rates)
+
+  var totalSpots = _.reduce(garages, function(sum,garage) {
+    return sum + Number(garage.open_spaces)
+  },0)
+  
+  // Update the legend
+  document.getElementById('Largest').innerHTML = '<div>' + biggestSpot.friendlyName + ', Spots: ' + biggestSpot.open_spaces + '</div>'
+  document.getElementById('Smallest').innerHTML = '<div>' + smallestLot.friendlyName + ', Spots: ' + smallestLot.open_spaces + '</div>'
+  document.getElementById('Total').innerHTML = totalSpots
+  document.getElementById('Cheapest').innerHTML = '<div>' + cheapestLot.friendlyName + ', Cost: $' + minCost + '</div>'
+  document.getElementById('Expensive').innerHTML = '<div>' + costliestLot.friendlyName + ', Cost: $' + maxCost + '</div>'
+
   _.forEach(garages, function(garage){
     var points = garage.points
     var latlng = [points[0], points[1]]
+    var spots =  Number(garage.open_spaces)
+    var name = garage.friendlyName
+    var rates = garage.rates
+    var rateToday = getRate(rates)
+    
+    // Compare this data point to the min/max. 
+    var ratioSize = spots/maxCapacity
+    var ratioRate = rateToday/maxCost
+    
+    // Some fancy math for determing the size of the circle. Also a check to modify any that would be too small. 
+    var size = 250 * ratioSize
+    if (size < 10) size = 10; 
 
-    // create a circle layer
-    var circle = L.circle(latlng, 10, {
-        color: 'red',
-        fillColor: '#f03',
+    // Some fancy math for determing a color range(Too easy @andrew)
+    var range = 100 * (ratioRate)
+    var r = Math.round((255 * range) / 100);
+    var g = Math.round((255 * (100 - range)) / 100);
+    var b = 0;
+    var color= "rgb("+r+" ,"+g+","+ b+")"; 
+
+
+
+    var circle = L.circle(latlng, size, {
+        color: color,
+        fillColor: color,
         fillOpacity: 0.5
-    }).bindLabel('Label (Change Me)')
+    }).bindLabel(name + " contains " + spots + " spots. Cost: $" + rateToday)
+
+    //Extend the Default marker class
+     var CostIcon = L.Icon.Default.extend({
+        options: {
+              iconUrl: 'dollar.png' 
+        }
+     })
+     var costIcon = new CostIcon();
+
+     var BigIcon = L.Icon.Default.extend({
+        options: {
+              iconUrl: 'biggest.png' 
+        }
+     })
+     var bigIcon = new BigIcon();
 
     // add the circle layer to the makers layer group
     markersLayerGroup.addLayer(circle)
+      
+    if (getRate(garage.rates) == getRate(cheapestLot.rates))
+    {
+      L.marker(latlng, {icon: costIcon}).bindLabel(name + " has a min cost: $" +minCost).addTo(markersLayerGroup);
+    }
+    if (garage == biggestSpot)
+    {
+      L.marker(latlng, {icon: bigIcon}).bindLabel(name + " has the most spots: " + maxCapacity).addTo(markersLayerGroup);
+    }
 
   })
 
 }
+
+// create a firebase reference to the root
+var ref = new Firebase('https://pizzarollz.firebaseio.com');
+
+var customersData
+
+
+// read data from the location san_francisco/garages, only once
+ref.child('customers').on('value', function(snapshot){
+  customersData = snapshot.val()
+  drawCustomers(customersData)
+})
+
+function drawCustomers(customers){
+  customerLayerGroup.clearLayers()
+  // Create a marker for da peoplez. 
+   var PersonMarker = L.Icon.Default.extend({
+      options: {
+            iconUrl: 'person.png', 
+            shadowSize: [0,0]
+      }
+   })
+
+   // Draw the pplz!
+  _.forEach(customers, function(customer){
+
+    // Extract the needed information. 
+    var latlng = [Number(customer.lat), Number(customer.lon)]
+    var name = customer.name
+    var duration = customer.duration
+
+    // Draw a marker for this ppl. 
+    var personIcon = new PersonMarker();
+
+    L.marker(latlng,{icon: personIcon}).bindLabel(name).addTo(customerLayerGroup);
+  })
+
+}
+
 
       </script>
     </body>
