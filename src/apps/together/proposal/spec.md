@@ -89,11 +89,103 @@ The major actions of our app are:
 ### case: can mute chat box
 
 
-## Action: Update the Score CHRIS
+## Action: Update Score
 
-### case: 
+### Case: Add Note
+``` javascript
+//given
+foo.bar.score is
+{
+  'score':'note',
+    "isFlat" : [ false ],
+    "isSharp" : [ true ],
+    "length" : {
+      "isHalf" : [ true ],
+      "isQuarter" : [ false ],
+      "isWhole" : [ false ]
+    },
+    "location" : [1],
+    "value" : ["e"]
+}
 
-### case: 
+//when
+add_note(flat, not sharp, half, location)
+
+foo.bar.score is
+
+{
+  'score':'note',
+    "isFlat" : [ false ],
+    "isSharp" : [ true ],
+    "length" : {
+      "isHalf" : [ true ],
+      "isQuarter" : [ false ],
+      "isWhole" : [ false ]
+    },
+    "location" : [1],
+    "value" : ["e"]
+}
+
+{
+  'score':'note',
+    "isFlat" : [ true ],
+    "isSharp" : [ false ],
+    "length" : {
+      "isHalf" : [ true ],
+      "isQuarter" : [ false ],
+      "isWhole" : [ false ]
+    },
+    "location" : [3],
+    "value" : ["f"]
+}
+
+### Case: Remove Note
+``` javascript
+//given
+foo.bar.score is
+{
+  'score':'note',
+    "isFlat" : [ false ],
+    "isSharp" : [ true ],
+    "length" : {
+      "isHalf" : [ true ],
+      "isQuarter" : [ false ],
+      "isWhole" : [ false ]
+    },
+    "location" : [1],
+    "value" : ["e"]
+}
+
+{
+  'score':'note',
+    "isFlat" : [ true ],
+    "isSharp" : [ false ],
+    "length" : {
+      "isHalf" : [ true ],
+      "isQuarter" : [ false ],
+      "isWhole" : [ false ]
+    },
+    "location" : [3],
+    "value" : ["f"]
+}
+
+//when
+remove_note(flat, not sharp, half, location)
+
+foo.bar.score is
+
+{
+  'score':'note',
+    "isFlat" : [ false ],
+    "isSharp" : [ true ],
+    "length" : {
+      "isHalf" : [ true ],
+      "isQuarter" : [ false ],
+      "isWhole" : [ false ]
+    },
+    "location" : [1],
+    "value" : ["e"]
+}
 
 
 ## Action: Add bars to score BROOKE
