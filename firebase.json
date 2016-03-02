@@ -1,5 +1,5 @@
 {
-  "firebase": "ucddbrobinson",
+  "firebase": "musictogether",
   "public": "build",
   "ignore": [
     "firebase.json",
