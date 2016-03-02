@@ -18,7 +18,7 @@ layout: layout.hbs
 
 ## Actions / State Transformation Specification
 
-Given the BBD description you came up with during the hackathon,
+Given the BDD description you came up with during the hackathon,
 identify the key actions. Then, for each action, specify how the action would
 transform the real-time state of your app. Use the template at
 [`/apps/together/proposal/spec.md`](/apps/together/proposal/spec.html). This
