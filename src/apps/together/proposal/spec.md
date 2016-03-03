@@ -322,56 +322,39 @@ foo.bar.score is
 
 ### case: when button clicked updates the number of bars by one
 
+``` javascript
+
+//given
+foo.bar.score is
+{ 
+ "score" : {
+    "bar1" : 1,
+    "timeSig" : {
+      "bottom" : 4,
+      "top" : 4
+    }
+  },
+}
+
+//button action to add another bar
+//when
+button_clicked()
+
+foo.bar.score is
+{
+  "score" : {
+    "bar1" : 1,
+    "bar2" : 2,
+    "timeSig" : {
+      "bottom" : 4,
+      "top" : 4
+    }
+  },
+}
+
+
 ### case: all other users can see update in real time
 
+## we will use code that will subscribe to the changes in firebase, that way all users can see changes made others to the firebase.
 
 
-(remove the example below before submission)
-
-## Action: Post A Message (Example)
-
-### case: post a message 'd'
-
-``` javascript
-// given
-foo.bar.messages is
-{
-  '-cadsace': 'a',
-  '-cadsacf': 'b',
-  '-cadsacg': 'c'
-}
-
-// when
-post_a_message(text = 'd')
-
-// then
-foo.bar.messages should be
-{
-  '-cadsace': 'a',
-  '-cadsacf': 'b',
-  '-cadsacg': 'c',
-  '-cadsach': 'd',
-}
-```
-
-### case: delete a message
-
-``` javascript
-// given
-foo.bar.messages is
-{
-  '-cadsace': 'a',
-  '-cadsacf': 'b',
-  '-cadsacg': 'c'
-}
-
-// when
-delete_a_message(id = '-cadsacg')
-
-// then
-foo.bar.messages should be
-{
-  '-cadsace': 'a',
-  '-cadsacf': 'b'
-}
-```
