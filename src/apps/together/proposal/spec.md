@@ -85,9 +85,49 @@ The major actions of our app are:
 ## Action: Interactability with other Users STEVEN
 
 ### case: chat box opens when clicked
+``` javascript
+button.onclick
+{
+  chatRef.onAuth:
+  if auth:
+	chat enable
+  else
+	error
+}
 
-### case: can mute chat box
+chat enable {
+ chat = new Firechat(firebaseRef, options)
+ this.roomQueue = [];
+ this.user = user;
+ this.userName = userName;
+ this.sessionId = sessionReference; 
+}
 
+### case: invite users to chat room
+``` javascript
+send Invite onclick{
+ inviteRef = firebase user ref;
+ if (!authenticated){
+   return err;
+ }
+ if (roomtype){
+   authorizedUser.set(true, roomId);
+ }
+ inviteRef.set(id, fromUser, roomId, toUser);
+}
+
+acceptInvite {
+   inviteRef = snapshot.val();
+   enterRoom(invite.roomId);
+   inviteRef.setstatus = accepted;
+   inviteRef.userName = username;
+}
+
+declineInvite {
+   inviteRef = snapshot.val();
+   inviteRef.setstatus = declined;
+   inviteRef.userName = username;   
+}
 
 ## Action: Update Score
 
