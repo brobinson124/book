@@ -67,19 +67,109 @@ The major actions of our app are:
 * Add bars to score
 
 
-## Action: Login CONNOR
+### Action: Login CONNOR
 
 
 ### case: login for the first time
+'''
+using a javascript file (such as the one provided in the Uber app)
+the user can be authenticated by github
+as well a user object can be created with user properties
+Firebase .authWithOAuthPopup makes authenticating users very easy
+'''
+'''
+actions.login = function(){
+
+  firebaseRef.authWithOAuthPopup("github", function(error, authData){
+
+    // handle the result of the authentication
+    if (error) {
+      console.log("Login Failed!", error);
+    } else {
+      console.log("Authenticated successfully with payload:", authData);
+
+      // create a user object based on authData
+      var user = {
+        displayName: authData.github.displayName,
+        username: authData.github.username,
+        id: authData.github.id,
+        status: 'online',
+        pos: data.center  // position, default to the map center
+      }
+
+      var userRef = firebaseRef.child('users').child(user.username)
+
+      // subscribe to the user data
+      userRef.on('value', function(snapshot){
+        data.user = snapshot.val()
+        render()
+      })
+
+      // set the user data
+      userRef.set(user)
+
+    }
+  })
+
+}
+'''
 
 ### case: keep login-ed status even when window is closed 
+'''
+Using this data object 'user', the user can remained logged in.
+As long as the user's 'status' attribute is set to online, they will remain logged in.
+Only when a user logs out, will their status be changed to 'offline'
+'''
+'''
+      // create a user object based on authData
+      var user = {
+        displayName: authData.github.displayName,
+        username: authData.github.username,
+        id: authData.github.id,
+        status: 'online',
+        pos: data.center  // position, default to the map center
+      }
+'''
 
 
 ## Action: Logout CONNOR
 
 ### case: logout when button is toggeled
+'''
+Similiar to login, our app will utulize Firebase's log out template code
+As well, when a user log's out, "userRef.child('status').set('offline')" will change the user's status to 'offline'.
+'''
+actions.logout = function(){
+
+  if (data.user){
+
+    firebaseRef.unauth()
+
+    var userRef = firebaseRef
+      .child('users')
+      .child(data.user.username)
+
+    // unsubscribe to the user data
+    userRef.off()
+
+    // set the user's status to offline
+    userRef.child('status').set('offline')
+
+    data.user = null
+
+    render()
+
+  }
 
 ### case: stay logged out when window is closed and re-opened
+'''
+By implementing the code below, a user's status will remain 'offline' until they 'login' again.
+Even when the user closes the window and re enters the app, their status will remain 'offline' (logged out) until they click 'login'.
+'''
+    // set the user's status to offline
+    userRef.child('status').set('offline')
+'''
+
 
 
 ## Action: Interactability with other Users STEVEN
