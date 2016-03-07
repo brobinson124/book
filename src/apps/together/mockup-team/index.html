@@ -109,6 +109,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+      <!-->
 			<nav class="navbar-fixed-top">
 				<div class="nav-wrapper black darken-1">
 					<a href="index.html" class="brand-logo right">Music_Together</a>
@@ -117,11 +118,27 @@
 						<li><a href="signup.html">Sign Up!</a></li>
 						<li><a href="newscore.html">New Score</a></li>
 						<li><a href="friend.html"t with is the enjoyment of creating something new, and well >Find Friends</a></li>
-						<li><a href="login.html">Login</a></li>
+						<li><a href="login/">Login</a></li>
 						
 					</ul>
 				</div>
 			</nav>
+		-->
+
+
+
+    <script>
+      // MyComponents is a global object where each property is a reference to a component class
+      MyComponents = {}
+    </script>
+
+    <!-- import each component class in components/ -->
+    <!-- The order is important. Dependencies must be loaded first -->
+    <script type="text/babel" src="components/navbar.jsx"></script>
+    <script type="text/babel" src="components/user.jsx"></script>
+    <script type="text/babel" src="components/app.jsx"></script>
+    <script type="text/babel" src="data.jsx"></script>
+
 			<div id="slideshow">
 				<div class="event-image" style="background: url('img/event1.jpg');">
 					<div style="width: 60%; margin: 0 auto; z-index: 1">

@@ -25,4 +25,19 @@ class User extends React.Component {
 }
 MyComponents.User = User;
 
+/*
 
+        <nav>
+        <div class="nav-wrapper blue-grey darken-1">
+          <a href="#" class="brand-logo"> Refresh Your Ride!</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul id="nav-mobile" class="right">
+            <li><a href="#" onClick={this.props.loginAction}>Login</a></li>
+            <li><a href="client/">Map</a></li>
+            <li><a href="admin/">Current Providers</a></li>
+
+          </ul>
+        </div>
+      </nav>
+
+*/
