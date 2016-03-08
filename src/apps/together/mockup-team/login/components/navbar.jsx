@@ -5,7 +5,7 @@ class NavBar extends React.Component {
             <nav>
                 <div className="nav-wrapper blue-grey darken-1">
 
-                    <a href="../index.html" className="brand-logo">Music_Together</a>
+                    <a href="index.html" className="brand-logo">Music_Together</a>
                     
                     <MyComponents.User
                         user={this.props.data.user}

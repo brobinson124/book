@@ -6,10 +6,7 @@ var match = document.cookie.match(new RegExp('user=([^;]+)'));
 }();
 
 var data = {
-  center: [39.74, -104.99], // Denver
-  providers: [],
-  user: userData,
-  needs: []
+  user: userData
 }
 
 // a single 'handlers' object that holds all the actions of your entire app
@@ -33,14 +30,6 @@ function render(){
 
 var firebaseRef = new Firebase('https://musictogether.firebaseio.com');
 
-// Real-time Data (load constantly on changes)
-firebaseRef.child('providers')
-  .on('value', function(snapshot){
-
-    data.providers = _.values(snapshot.val());
-    render()
-
-  })
 
 //
 // ACTIONS
@@ -62,10 +51,7 @@ actions.login = function(){
             name: authData.github.username,
             id: authData.github.id,
             status: 'online',
-            lastActive: Date.now(),
-            // position, default to the map center
-            lat: 39.74,
-            lon: -104.99
+            lastActive: Date.now()
         };
 
         document.cookie = "user="+JSON.stringify(user)+"; path=/";
