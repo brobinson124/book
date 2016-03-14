@@ -24,12 +24,13 @@ function render(){
   );
 }
 
+
+
 //
 // DATA
 //
 
 var firebaseRef = new Firebase('https://musictogether.firebaseio.com');
-
 
 //
 // ACTIONS
@@ -48,7 +49,7 @@ actions.login = function(){
         // create a user object based on authData
         var user = {
             displayName: authData.github.displayName,
-            name: authData.github.username,
+            name: authData.github.name,
             id: authData.github.id,
             status: 'online',
             lastActive: Date.now()
@@ -95,3 +96,4 @@ actions.logout = function(){
 
 };
 
+render()

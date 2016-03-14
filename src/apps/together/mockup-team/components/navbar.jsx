@@ -3,10 +3,10 @@ class NavBar extends React.Component {
     render(){
         return (
             <nav>
-                <nav class="navbar-fixed-top">
-                <div class="nav-wrapper black darken-1">
+                <nav className="navbar-fixed-top">
+                <div className="nav-wrapper black darken-1">
 
-                    <a href="index.html" class="brand-logo right">Music_Together</a>
+                    <a href="index.html" className="brand-logo right">Music_Together</a>
                     
                     <MyComponents.User
                         user={this.props.data.user}
