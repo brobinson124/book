@@ -32,6 +32,10 @@ function render(){
 
 var firebaseRef = new Firebase('https://musictogether.firebaseio.com');
 
+
+
+
+
 //
 // ACTIONS
 //
@@ -49,7 +53,7 @@ actions.login = function(){
         // create a user object based on authData
         var user = {
             displayName: authData.github.displayName,
-            name: authData.github.name,
+            name: authData.github.username,
             id: authData.github.id,
             status: 'online',
             lastActive: Date.now()
@@ -79,6 +83,7 @@ actions.logout = function(){
     var userRef = firebaseRef
       .child('users')
       .child(data.user.name);
+
 
   document.cookie = "user=; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/";
 

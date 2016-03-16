@@ -13,7 +13,7 @@ class NavBar extends React.Component {
                         loginAction={this.props.actions.login}
                         logoutAction={this.props.actions.logout}/>
                 </div>
-            </nav>
+                </nav>
             </nav>
         );
     }
