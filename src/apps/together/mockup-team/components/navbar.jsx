@@ -6,7 +6,7 @@ class NavBar extends React.Component {
                 <nav className="navbar-fixed-top">
                 <div className="nav-wrapper black darken-1">
 
-                    <a href="friend.html" className="brand-logo right">Music_Together</a>
+                    <a href="index.html" className="brand-logo right">Music_Together</a>
 
                     <MyComponents.User
                         user={this.props.data.user}
