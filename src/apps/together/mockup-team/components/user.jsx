@@ -11,7 +11,7 @@ class User extends React.Component {
             return <ul id="nav-mobile" className="left hide-on-med-and-down">
                 <li className="active"><a href="index.html">Home</a></li>
                 <li><a href="newscore.html">New Score</a></li>
-                <li><a href="drafting.html">Drafting</a></li>
+                <li><a href="examples.html">Examples</a></li>
                 <li><a href="friend.html">Find Friends</a></li>
                 <li><a href={"https://github.com/" + u}>{this.props.user.name}</a></li>
                 <li><a className="right" href="#" onClick={this.props.logoutAction}>Logout</a></li>
