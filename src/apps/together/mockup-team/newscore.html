@@ -1,53 +1,384 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-    <link rel='stylesheet' href='https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css'/>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <script src="lib/react.js"></script>
-    <script src="lib/react-dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+      <script src="lib/react.js"></script>
+      <script src="lib/react-dom.js"></script>
 
-    <!-- Firechat -->
-    <script src='https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.js'></script>
-</head>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
-<body style="background: url('img/musictheme.jpg'); width: 100%; height: 100%; background-repeat: no-repeat; background-size: cover; background-attachment: fixed; background-position: center;">
+    <script type="text/javascript">
+    function readDatabase() {
+      var topRef = new Firebase("https://musictogether.firebaseio.com/");
 
-<div id="app-container" class="container">
-</div>
+      var firstRef = topRef.child("first");
+      var secondRef = topRef.child("second");
+      var thirdRef = topRef.child("third");
+      var fourthRef = topRef.child("fourth");
+      var fifthRef = topRef.child("fifth");
+      var sixthRef = topRef.child("sixth");
+      var seventhRef = topRef.child("seventh");
+      var eighthRef = topRef.child("eighth");
+
+      firstRef.on("value", function(snapshot) {
+      var firstNote = snapshot.val();
+
+      if (firstNote.C == "yes") {
+        document.getElementById('c_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('c_note').style.visibility = 'hidden'
+      }
+
+      if (firstNote.D == "yes") {
+        document.getElementById('d_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('d_note').style.visibility = 'hidden'
+      }
+
+      if (firstNote.F == "yes") {
+        document.getElementById('f_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('f_note').style.visibility = 'hidden'
+      }
+
+      if (firstNote.E == "yes") {
+        document.getElementById('e_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('e_note').style.visibility = 'hidden'
+      }
+
+      if (firstNote.G == "yes") {
+        document.getElementById('g_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('g_note').style.visibility = 'hidden'
+      }
+
+      if (firstNote.A == "yes") {
+        document.getElementById('a_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('a_note').style.visibility = 'hidden'
+      }
+
+      if (firstNote.B == "yes") {
+        document.getElementById('b_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('b_note').style.visibility = 'hidden'
+      }
+      });
+
+      secondRef.on("value", function(snapshot) {
+      var secondNote = snapshot.val();
+      if (secondNote.C == "yes") {
+        document.getElementById('c2_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('c2_note').style.visibility = 'hidden'
+      }
+      if (secondNote.D == "yes") {
+        document.getElementById('d2_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('d2_note').style.visibility = 'hidden'
+      }
+      if (secondNote.E == "yes") {
+        document.getElementById('e2_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('e2_note').style.visibility = 'hidden'
+      }
+      if (secondNote.F == "yes") {
+        document.getElementById('f2_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('f2_note').style.visibility = 'hidden'
+      }
+      if (secondNote.G == "yes") {
+        document.getElementById('g2_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('g2_note').style.visibility = 'hidden'
+      }
+      if (secondNote.A == "yes") {
+        document.getElementById('a2_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('a2_note').style.visibility = 'hidden'
+      }
+      if (secondNote.B == "yes") {
+        document.getElementById('b2_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('b2_note').style.visibility = 'hidden'
+      }
+    });
+
+      thirdRef.on("value", function(snapshot) {
+      var thirdNote = snapshot.val();
+      if (thirdNote.C == "yes") {
+        document.getElementById('c3_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('c3_note').style.visibility = 'hidden'
+      }
+      if (thirdNote.D == "yes") {
+        document.getElementById('d3_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('d3_note').style.visibility = 'hidden'
+      }
+      if (thirdNote.E == "yes") {
+        document.getElementById('e3_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('e3_note').style.visibility = 'hidden'
+      }
+      if (thirdNote.F == "yes") {
+        document.getElementById('f3_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('f3_note').style.visibility = 'hidden'
+      }
+      if (thirdNote.G == "yes") {
+        document.getElementById('g3_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('g3_note').style.visibility = 'hidden'
+      }
+      if (thirdNote.A == "yes") {
+        document.getElementById('a3_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('a3_note').style.visibility = 'hidden'
+      }
+      if (thirdNote.B == "yes") {
+        document.getElementById('b3_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('b3_note').style.visibility = 'hidden'
+      }
+    });
+
+      fourthRef.on("value", function(snapshot) {
+      var fourthNote = snapshot.val();
+      if (fourthNote.C == "yes") {
+        document.getElementById('c4_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('c4_note').style.visibility = 'hidden'
+      }
+      if (fourthNote.D == "yes") {
+        document.getElementById('d4_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('d4_note').style.visibility = 'hidden'
+      }
+      if (fourthNote.E == "yes") {
+        document.getElementById('e4_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('e4_note').style.visibility = 'hidden'
+      }
+      if (fourthNote.F == "yes") {
+        document.getElementById('f4_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('f4_note').style.visibility = 'hidden'
+      }
+      if (fourthNote.G == "yes") {
+        document.getElementById('g4_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('g4_note').style.visibility = 'hidden'
+      }
+      if (fourthNote.A == "yes") {
+        document.getElementById('a4_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('a4_note').style.visibility = 'hidden'
+      }
+      if (fourthNote.B == "yes") {
+        document.getElementById('b4_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('b4_note').style.visibility = 'hidden'
+      }
+    });
+
+      fifthRef.on("value", function(snapshot) {
+      var fifthNote = snapshot.val();
+      if (fifthNote.C == "yes") {
+        document.getElementById('c12_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('c12_note').style.visibility = 'hidden'
+      }
+      if (fifthNote.D == "yes") {
+        document.getElementById('d12_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('d12_note').style.visibility = 'hidden'
+      }
+      if (fifthNote.E == "yes") {
+        document.getElementById('e12_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('e12_note').style.visibility = 'hidden'
+      }
+      if (fifthNote.F == "yes") {
+        document.getElementById('f12_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('f12_note').style.visibility = 'hidden'
+      }
+      if (fifthNote.G == "yes") {
+        document.getElementById('g12_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('g12_note').style.visibility = 'hidden'
+      }
+      if (fifthNote.A == "yes") {
+        document.getElementById('a12_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('a12_note').style.visibility = 'hidden'
+      }
+      if (fifthNote.B == "yes") {
+        document.getElementById('b12_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('b12_note').style.visibility = 'hidden'
+      }
+    });
+
+      sixthRef.on("value", function(snapshot) {
+      var sixthNote = snapshot.val();
+      if (sixthNote.C == "yes") {
+        document.getElementById('c22_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('c22_note').style.visibility = 'hidden'
+      }
+      if (sixthNote.D == "yes") {
+        document.getElementById('d22_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('d22_note').style.visibility = 'hidden'
+      }
+      if (sixthNote.E == "yes") {
+        document.getElementById('e22_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('e22_note').style.visibility = 'hidden'
+      }
+      if (sixthNote.F == "yes") {
+        document.getElementById('f22_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('f22_note').style.visibility = 'hidden'
+      }
+      if (sixthNote.G == "yes") {
+        document.getElementById('g22_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('g22_note').style.visibility = 'hidden'
+      }
+      if (sixthNote.A == "yes") {
+        document.getElementById('a22_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('a22_note').style.visibility = 'hidden'
+      }
+      if (sixthNote.B == "yes") {
+        document.getElementById('b22_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('b22_note').style.visibility = 'hidden'
+      }
+    });
+
+      seventhRef.on("value", function(snapshot) {
+      var seventhNote = snapshot.val();
+      if (seventhNote.C == "yes") {
+        document.getElementById('c32_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('c32_note').style.visibility = 'hidden'
+      }
+      if (seventhNote.D == "yes") {
+        document.getElementById('d32_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('d32_note').style.visibility = 'hidden'
+      }
+      if (seventhNote.E == "yes") {
+        document.getElementById('e32_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('e32_note').style.visibility = 'hidden'
+      }
+      if (seventhNote.F == "yes") {
+        document.getElementById('f32_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('f32_note').style.visibility = 'hidden'
+      }
+      if (seventhNote.G == "yes") {
+        document.getElementById('g32_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('g32_note').style.visibility = 'hidden'
+      }
+      if (seventhNote.A == "yes") {
+        document.getElementById('a32_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('a32_note').style.visibility = 'hidden'
+      }
+      if (seventhNote.B == "yes") {
+        document.getElementById('b32_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('b32_note').style.visibility = 'hidden'
+      }
+    });
+
+      eighthRef.on("value", function(snapshot) {
+      var eighthNote = snapshot.val();
+      if (eighthNote.C == "yes") {
+        document.getElementById('c42_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('c42_note').style.visibility = 'hidden'
+      }
+      if (eighthNote.D == "yes") {
+        document.getElementById('d42_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('d42_note').style.visibility = 'hidden'
+      }
+      if (eighthNote.E == "yes") {
+        document.getElementById('e42_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('e42_note').style.visibility = 'hidden'
+      }
+      if (eighthNote.F == "yes") {
+        document.getElementById('f42_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('f42_note').style.visibility = 'hidden'
+      }
+      if (eighthNote.G == "yes") {
+        document.getElementById('g42_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('g42_note').style.visibility = 'hidden'
+      }
+      if (eighthNote.A == "yes") {
+        document.getElementById('a42_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('a42_note').style.visibility = 'hidden'
+      }
+      if (eighthNote.B == "yes") {
+        document.getElementById('b42_note').style.visibility = 'visible'
+      } else {
+        document.getElementById('b42_note').style.visibility = 'hidden'
+      }
+    });
 
 
-<script>
-    // MyComponents is a global object where each property is a reference to a component class
-    MyComponents = {}
-</script>
+    }
+    window.onload = readDatabase;
+    </script>
+      </head>
 
+    <body style="background: url('img/musictheme.jpg'); width: 100%; height: 100%; background-repeat: no-repeat; background-attachment: fixed; background-position: center;">
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+      <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
 
-<!-- import each component class in components/ -->
-<!-- The order is important. Dependencies must be loaded first -->
-<script type="text/babel" src="components/navbar.jsx"></script>
-<script type="text/babel" src="components/user.jsx"></script>
-<script type="text/babel" src="components/app.jsx"></script>
-<script type="text/babel" src="data.jsx"></script>
-
-
+      <div class="container">
+        <nav>
+          <div class="nav-wrapper blue-grey darken-1">
+            <a href="index.html" class="brand-logo right">Music_Together</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="signup.html">Sign Up!</a></li>
+              <li class="active"><a href="newscore.html">New Score</a></li>
+              <li><a href="friend.html">Find Friends</a></li>
+              <li><a href="login.html">Login</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
        
 
        <div class="container">
         <img src="score.png" style="position: fixed; top:110px; left:50px; width:900px; clip: rect(0px,605px,200px,0px); ">
 <!-- FIRST BAR -->
         <div class="container" style="position: fixed; top :80px; left:115px;">
-				
         <!-- Dropdown Trigger -->
         <a class='dropdown-button small btn-small material-icons' href='#' data-activates='dropdown11'>queue_music</a>
 
@@ -229,210 +560,299 @@
 </div>
 
 <script>
+var ref = new Firebase("https://musictogether.firebaseio.com/");
     /* 1st quarter note; 1st bar */
     function add_c11() {
+      var firstRefC = ref.child("first/C");
         if (document.getElementById('c_note').style.visibility == 'hidden') {
             document.getElementById('c_note').style.visibility = 'visible';
+
+            firstRefC.set("yes");
+
         } else {
             document.getElementById('c_note').style.visibility = 'hidden';
+            firstRefC.set("no");
         }
     }
     function add_d11() {
+      var firstRefD = ref.child("first/D");
         if (document.getElementById('d_note').style.visibility == 'hidden') {
             document.getElementById('d_note').style.visibility = 'visible';
+            firstRefD.set("yes");
+
         } else {
             document.getElementById('d_note').style.visibility = 'hidden';
+            firstRefD.set("no");
         }
     }
     function add_e11() {
+      var firstRefE = ref.child("first/E");
         if (document.getElementById('e_note').style.visibility == 'hidden') {
             document.getElementById('e_note').style.visibility = 'visible';
+            firstRefE.set("yes");
+
         } else {
             document.getElementById('e_note').style.visibility = 'hidden';
+            firstRefE.set("no");
         }
     }
     function add_f11() {
+      var firstRefF = ref.child("first/F");
         if (document.getElementById('f_note').style.visibility == 'hidden') {
             document.getElementById('f_note').style.visibility = 'visible';
+            firstRefF.set("yes");
         } else {
             document.getElementById('f_note').style.visibility = 'hidden';
+            firstRefF.set("no");
         }
     }
     function add_b11() {
+      var firstRefB = ref.child("first/B");
         if (document.getElementById('b_note').style.visibility == 'hidden') {
             document.getElementById('b_note').style.visibility = 'visible';
+            firstRefB.set("yes");
         } else {
             document.getElementById('b_note').style.visibility = 'hidden';
+            firstRefB.set("no");
         }
     }
     function add_a11() {
+      var firstRefA = ref.child("first/A");
         if (document.getElementById('a_note').style.visibility == 'hidden') {
             document.getElementById('a_note').style.visibility = 'visible';
+            firstRefA.set("yes");
         } else {
             document.getElementById('a_note').style.visibility = 'hidden';
+            firstRefA.set("no");
         }
     }
     function add_g11() {
+      var firstRefG = ref.child("first/G");
         if (document.getElementById('g_note').style.visibility == 'hidden') {
             document.getElementById('g_note').style.visibility = 'visible';
+            firstRefG.set("yes");
         } else {
             document.getElementById('g_note').style.visibility = 'hidden';
+            firstRefG.set("no");
         }
     }
     /* 1st quarter note; 1st bar */
 
     /* 2nd quarter note; 1st bar */
     function add_c21() {
+      var secondRefC = ref.child("second/C");
         if (document.getElementById('c2_note').style.visibility == 'hidden') {
             document.getElementById('c2_note').style.visibility = 'visible';
+            secondRefC.set("yes");
         } else {
             document.getElementById('c2_note').style.visibility = 'hidden';
+            secondRefC.set("no");
         }
     }
     function add_d21() {
+      var secondRefD = ref.child("second/D");
         if (document.getElementById('d2_note').style.visibility == 'hidden') {
             document.getElementById('d2_note').style.visibility = 'visible';
+            secondRefD.set("yes");
         } else {
             document.getElementById('d2_note').style.visibility = 'hidden';
+            secondRefD.set("no");
         }
     }
     function add_e21() {
+      var secondRefE = ref.child("second/E");
         if (document.getElementById('e2_note').style.visibility == 'hidden') {
             document.getElementById('e2_note').style.visibility = 'visible';
+            secondRefE.set("yes");
         } else {
             document.getElementById('e2_note').style.visibility = 'hidden';
+            secondRefE.set("no");
         }
     }
     function add_f21() {
+      var secondRefF = ref.child("second/F");
         if (document.getElementById('f2_note').style.visibility == 'hidden') {
             document.getElementById('f2_note').style.visibility = 'visible';
+            secondRefF.set("yes");
         } else {
             document.getElementById('f2_note').style.visibility = 'hidden';
+            secondRefF.set("no");
         }
     }
     function add_b21() {
+      var secondRefB = ref.child("second/B");
         if (document.getElementById('b2_note').style.visibility == 'hidden') {
             document.getElementById('b2_note').style.visibility = 'visible';
+            secondRefB.set("yes");
         } else {
             document.getElementById('b2_note').style.visibility = 'hidden';
+            secondRefB.set("no");
         }
     }
     function add_a21() {
+      var secondRefA = ref.child("second/A");
         if (document.getElementById('a2_note').style.visibility == 'hidden') {
             document.getElementById('a2_note').style.visibility = 'visible';
+            secondRefA.set("yes");
         } else {
             document.getElementById('a2_note').style.visibility = 'hidden';
+            secondRefA.set("no");
         }
     }
     function add_g21() {
+      var secondRefG = ref.child("second/G");
         if (document.getElementById('g2_note').style.visibility == 'hidden') {
             document.getElementById('g2_note').style.visibility = 'visible';
+            secondRefG.set("yes");
         } else {
             document.getElementById('g2_note').style.visibility = 'hidden';
+            secondRefG.set("no");
         }
     }
     /* 2nd quarter note; 1st bar */
 
     /* 3rd quarter note; 1st bar */
     function add_c31() {
+      var thirdRefC = ref.child("third/C");
         if (document.getElementById('c3_note').style.visibility == 'hidden') {
             document.getElementById('c3_note').style.visibility = 'visible';
+            thirdRefC.set("yes");
         } else {
             document.getElementById('c3_note').style.visibility = 'hidden';
+            thirdRefC.set("no");
         }
     }
     function add_d31() {
+      var thirdRefD = ref.child("third/D");
         if (document.getElementById('d3_note').style.visibility == 'hidden') {
             document.getElementById('d3_note').style.visibility = 'visible';
+            thirdRefD.set("yes");
         } else {
             document.getElementById('d3_note').style.visibility = 'hidden';
+            thirdRefD.set("no");
         }
     }
     function add_e31() {
+      var thirdRefE = ref.child("third/E");
         if (document.getElementById('e3_note').style.visibility == 'hidden') {
             document.getElementById('e3_note').style.visibility = 'visible';
+            thirdRefE.set("yes");
         } else {
             document.getElementById('e3_note').style.visibility = 'hidden';
+            thirdRefE.set("no");
         }
     }
     function add_f31() {
+      var thirdRefF = ref.child("third/F");
         if (document.getElementById('f3_note').style.visibility == 'hidden') {
             document.getElementById('f3_note').style.visibility = 'visible';
+            thirdRefF.set("yes");
         } else {
             document.getElementById('f3_note').style.visibility = 'hidden';
+            thirdRefF.set("no");
         }
     }
     function add_b31() {
+      var thirdRefB = ref.child("third/B");
         if (document.getElementById('b3_note').style.visibility == 'hidden') {
             document.getElementById('b3_note').style.visibility = 'visible';
+            thirdRefB.set("yes");
         } else {
             document.getElementById('b3_note').style.visibility = 'hidden';
+            thirdRefB.set("no");
         }
     }
     function add_a31() {
+      var thirdRefA = ref.child("third/A");
         if (document.getElementById('a3_note').style.visibility == 'hidden') {
             document.getElementById('a3_note').style.visibility = 'visible';
+            thirdRefA.set("yes");
         } else {
             document.getElementById('a3_note').style.visibility = 'hidden';
+            thirdRefA.set("no");
         }
     }
     function add_g31() {
+      var thirdRefG = ref.child("third/G");
         if (document.getElementById('g3_note').style.visibility == 'hidden') {
             document.getElementById('g3_note').style.visibility = 'visible';
+            thirdRefG.set("yes");
         } else {
             document.getElementById('g3_note').style.visibility = 'hidden';
+            thirdRefG.set("no");
         }
     }
     /* 3rd quarter note; 1st bar */
 
     /* 4th quarter note; 1st bar */
     function add_c41() {
+      var fourthRefC = ref.child("fourth/C");
         if (document.getElementById('c4_note').style.visibility == 'hidden') {
             document.getElementById('c4_note').style.visibility = 'visible';
+            fourthRefG.set("yes");
         } else {
             document.getElementById('c4_note').style.visibility = 'hidden';
+            fourthRefG.set("no");
         }
     }
     function add_d41() {
+      var fourthRefD = ref.child("fourth/D");
         if (document.getElementById('d4_note').style.visibility == 'hidden') {
             document.getElementById('d4_note').style.visibility = 'visible';
+            fourthRefD.set("yes");
         } else {
             document.getElementById('d4_note').style.visibility = 'hidden';
+            fourthRefD.set("no");
         }
     }
     function add_e41() {
+      var fourthRefE = ref.child("fourth/E");
         if (document.getElementById('e4_note').style.visibility == 'hidden') {
             document.getElementById('e4_note').style.visibility = 'visible';
+            fourthRefE.set("yes");
         } else {
             document.getElementById('e4_note').style.visibility = 'hidden';
+            fourthRefE.set("no");
         }
     }
     function add_f41() {
+      var fourthRefF = ref.child("fourth/F");
         if (document.getElementById('f4_note').style.visibility == 'hidden') {
             document.getElementById('f4_note').style.visibility = 'visible';
+            fourthRefF.set("yes");
         } else {
             document.getElementById('f4_note').style.visibility = 'hidden';
+            fourthRefF.set("no");
         }
     }
     function add_b41() {
+      var fourthRefB = ref.child("fourth/B");
         if (document.getElementById('b4_note').style.visibility == 'hidden') {
             document.getElementById('b4_note').style.visibility = 'visible';
+            fourthRefB.set("yes");
         } else {
             document.getElementById('b4_note').style.visibility = 'hidden';
+            fourthRefB.set("no");
         }
     }
     function add_a41() {
+      var fourthRefA = ref.child("fourth/A");
         if (document.getElementById('a4_note').style.visibility == 'hidden') {
             document.getElementById('a4_note').style.visibility = 'visible';
+            fourthRefA.set("yes");
         } else {
             document.getElementById('a4_note').style.visibility = 'hidden';
+            fourthRefA.set("no");
         }
     }
     function add_g41() {
+      var fourthRefG = ref.child("fourth/G");
         if (document.getElementById('g4_note').style.visibility == 'hidden') {
             document.getElementById('g4_note').style.visibility = 'visible';
+            fourthRefG.set("yes");
         } else {
             document.getElementById('g4_note').style.visibility = 'hidden';
+            fourthRefG.set("no");
         }
     }
     /* 4th quarter note; 1st bar */
@@ -441,212 +861,297 @@
 
     /* 1st quarter note; 2nd bar */
     function add_c12() {
+      var fifthRefC = ref.child("fifth/C");
         if (document.getElementById('c12_note').style.visibility == 'hidden') {
             document.getElementById('c12_note').style.visibility = 'visible';
+            fifthRefC.set("yes");
         } else {
             document.getElementById('c12_note').style.visibility = 'hidden';
+            fifthRefC.set("no");
         }
     }
     function add_d12() {
+      var fifthRefD = ref.child("fifth/D");
         if (document.getElementById('d12_note').style.visibility == 'hidden') {
             document.getElementById('d12_note').style.visibility = 'visible';
+            fifthRefD.set("yes");
         } else {
             document.getElementById('d12_note').style.visibility = 'hidden';
+            fifthRefD.set("no");
         }
     }
     function add_e12() {
+      var fifthRefE = ref.child("fifth/E");
         if (document.getElementById('e12_note').style.visibility == 'hidden') {
             document.getElementById('e12_note').style.visibility = 'visible';
+            fifthRefE.set("yes");
         } else {
             document.getElementById('e12_note').style.visibility = 'hidden';
+            fifthRefE.set("no");
         }
     }
     function add_f12() {
+      var fifthRefF = ref.child("fifth/F");
         if (document.getElementById('f12_note').style.visibility == 'hidden') {
             document.getElementById('f12_note').style.visibility = 'visible';
+            fifthRefF.set("yes");
         } else {
             document.getElementById('f12_note').style.visibility = 'hidden';
+            fifthRefF.set("no");
         }
     }
     function add_b12() {
+      var fifthRefB = ref.child("fifth/B");
         if (document.getElementById('b12_note').style.visibility == 'hidden') {
             document.getElementById('b12_note').style.visibility = 'visible';
+            fifthRefB.set("yes");
         } else {
             document.getElementById('b12_note').style.visibility = 'hidden';
+            fifthRefB.set("no");
         }
     }
     function add_a12() {
+      var fifthRefA = ref.child("fifth/A");
         if (document.getElementById('a12_note').style.visibility == 'hidden') {
             document.getElementById('a12_note').style.visibility = 'visible';
+            fifthRefA.set("yes");
         } else {
             document.getElementById('a12_note').style.visibility = 'hidden';
+            fifthRefA.set("no");
         }
     }
     function add_g12() {
+      var fifthRefG = ref.child("fifth/G");
         if (document.getElementById('g12_note').style.visibility == 'hidden') {
             document.getElementById('g12_note').style.visibility = 'visible';
+            fifthRefG.set("yes");
         } else {
             document.getElementById('g12_note').style.visibility = 'hidden';
+            fifthRefG.set("no");
         }
     }
     /* 1st quarter note; 2nd bar */
 
     /* 2nd quarter note; 2nd bar */
     function add_c22() {
+      var sixthRefC = ref.child("sixth/C");
         if (document.getElementById('c22_note').style.visibility == 'hidden') {
             document.getElementById('c22_note').style.visibility = 'visible';
+            sixthRefC.set("yes");
         } else {
             document.getElementById('c22_note').style.visibility = 'hidden';
+            sixthRefC.set("no");
         }
     }
     function add_d22() {
+      var sixthRefD = ref.child("sixth/D");
         if (document.getElementById('d22_note').style.visibility == 'hidden') {
             document.getElementById('d22_note').style.visibility = 'visible';
+            sixthRefD.set("yes");
         } else {
             document.getElementById('d22_note').style.visibility = 'hidden';
+            sixthRefD.set("no");
         }
     }
     function add_e22() {
+      var sixthRefE = ref.child("sixth/E");
         if (document.getElementById('e22_note').style.visibility == 'hidden') {
             document.getElementById('e22_note').style.visibility = 'visible';
+            sixthRefE.set("yes");
         } else {
             document.getElementById('e22_note').style.visibility = 'hidden';
+            sixthRefE.set("no");
         }
     }
     function add_f22() {
+      var sixthRefF = ref.child("sixth/F");
         if (document.getElementById('f22_note').style.visibility == 'hidden') {
             document.getElementById('f22_note').style.visibility = 'visible';
+            sixthRefF.set("yes");
         } else {
             document.getElementById('f22_note').style.visibility = 'hidden';
+            sixthRefF.set("no");
         }
     }
     function add_b22() {
+      var sixthRefB = ref.child("sixth/B");
         if (document.getElementById('b22_note').style.visibility == 'hidden') {
             document.getElementById('b22_note').style.visibility = 'visible';
+            sixthRefB.set("yes");
         } else {
             document.getElementById('b22_note').style.visibility = 'hidden';
+            sixthRefB.set("no");
         }
     }
     function add_a22() {
+      var sixthRefA = ref.child("sixth/A");
         if (document.getElementById('a22_note').style.visibility == 'hidden') {
             document.getElementById('a22_note').style.visibility = 'visible';
+            sixthRefA.set("yes");
         } else {
             document.getElementById('a22_note').style.visibility = 'hidden';
+            sixthRefA.set("no");
         }
     }
     function add_g22() {
+      var sixthRefG = ref.child("sixth/G");
         if (document.getElementById('g22_note').style.visibility == 'hidden') {
             document.getElementById('g22_note').style.visibility = 'visible';
+            sixthRefG.set("yes");
         } else {
             document.getElementById('g22_note').style.visibility = 'hidden';
+            sixthRefG.set("no");
         }
     }
     /* 2nd quarter note; 2nd bar */
 
     /* 3rd quarter note; 2nd bar */
     function add_c32() {
+      var seventhRefC = ref.child("seventh/C");
         if (document.getElementById('c32_note').style.visibility == 'hidden') {
             document.getElementById('c32_note').style.visibility = 'visible';
+            seventhRefC.set("yes");
         } else {
             document.getElementById('c32_note').style.visibility = 'hidden';
+            seventhRefC.set("no");
         }
     }
     function add_d32() {
+      var seventhRefD = ref.child("seventh/D");
         if (document.getElementById('d32_note').style.visibility == 'hidden') {
             document.getElementById('d32_note').style.visibility = 'visible';
+            seventhRefD.set("yes");
         } else {
             document.getElementById('d32_note').style.visibility = 'hidden';
+            seventhRefD.set("no");
         }
     }
     function add_e32() {
+      var seventhRefE = ref.child("seventh/E");
         if (document.getElementById('e32_note').style.visibility == 'hidden') {
             document.getElementById('e32_note').style.visibility = 'visible';
+            seventhRefE.set("yes");
         } else {
             document.getElementById('e32_note').style.visibility = 'hidden';
+            seventhRefE.set("no");
         }
     }
     function add_f32() {
+      var seventhRefF = ref.child("seventh/F");
         if (document.getElementById('f32_note').style.visibility == 'hidden') {
             document.getElementById('f32_note').style.visibility = 'visible';
+            seventhRefF.set("yes");
         } else {
             document.getElementById('f32_note').style.visibility = 'hidden';
+            seventhRefF.set("no");
         }
     }
     function add_b32() {
+      var seventhRefB = ref.child("seventh/B");
         if (document.getElementById('b32_note').style.visibility == 'hidden') {
             document.getElementById('b32_note').style.visibility = 'visible';
+            seventhRefB.set("yes");
         } else {
             document.getElementById('b32_note').style.visibility = 'hidden';
+            seventhRefB.set("no");
         }
     }
     function add_a32() {
+      var seventhRefA = ref.child("seventh/A");
         if (document.getElementById('a32_note').style.visibility == 'hidden') {
             document.getElementById('a32_note').style.visibility = 'visible';
+            seventhRefA.set("yes");
         } else {
             document.getElementById('a32_note').style.visibility = 'hidden';
+            seventhRefA.set("no");
         }
     }
     function add_g32() {
+      var seventhRefG = ref.child("seventh/G");
         if (document.getElementById('g32_note').style.visibility == 'hidden') {
             document.getElementById('g32_note').style.visibility = 'visible';
+            seventhRefG.set("yes");
         } else {
             document.getElementById('g32_note').style.visibility = 'hidden';
+            seventhRefG.set("no");
         }
     }
     /* 3rd quarter note; 2nd bar */
 
     /* 4th quarter note; 2nd bar */
     function add_c42() {
+      var eighthRefC = ref.child("eighth/C");
         if (document.getElementById('c42_note').style.visibility == 'hidden') {
             document.getElementById('c42_note').style.visibility = 'visible';
+            eighthRefC.set("yes");
         } else {
             document.getElementById('c42_note').style.visibility = 'hidden';
+            eighthRefC.set("no");
         }
     }
     function add_d42() {
+      var eighthRefD = ref.child("eighth/D");
         if (document.getElementById('d42_note').style.visibility == 'hidden') {
             document.getElementById('d42_note').style.visibility = 'visible';
+            eighthRefD.set("yes");
         } else {
             document.getElementById('d42_note').style.visibility = 'hidden';
+            eighthRefD.set("no");
         }
     }
     function add_e42() {
+      var eighthRefE = ref.child("eighth/E");
         if (document.getElementById('e42_note').style.visibility == 'hidden') {
             document.getElementById('e42_note').style.visibility = 'visible';
+            eighthRefE.set("yes");
         } else {
             document.getElementById('e42_note').style.visibility = 'hidden';
+            eighthRefE.set("no");
         }
     }
     function add_f42() {
+      var eighthRefF = ref.child("eighth/F");
         if (document.getElementById('f42_note').style.visibility == 'hidden') {
             document.getElementById('f42_note').style.visibility = 'visible';
+            eighthRefF.set("yes");
         } else {
             document.getElementById('f42_note').style.visibility = 'hidden';
+            eighthRefF.set("no");
         }
     }
     function add_b42() {
+      var eighthRefB = ref.child("eighth/B");
         if (document.getElementById('b42_note').style.visibility == 'hidden') {
             document.getElementById('b42_note').style.visibility = 'visible';
+            eighthRefB.set("yes");
         } else {
             document.getElementById('b42_note').style.visibility = 'hidden';
+            eighthRefB.set("no");
         }
     }
     function add_a42() {
+      var eighthRefA = ref.child("eighth/A");
         if (document.getElementById('a42_note').style.visibility == 'hidden') {
             document.getElementById('a42_note').style.visibility = 'visible';
+            eighthRefA.set("yes");
         } else {
             document.getElementById('a42_note').style.visibility = 'hidden';
+            eighthRefA.set("no");
         }
     }
     function add_g42() {
+      var eighthRefG = ref.child("eighth/G");
         if (document.getElementById('g42_note').style.visibility == 'hidden') {
         document.getElementById('g42_note').style.visibility = 'visible';
+        eighthRefG.set("yes");
       } else {
         document.getElementById('g42_note').style.visibility = 'hidden';
+        eighthRefG.set("no");
       }
     }
 /* 4th quarter note; 2nd bar */
 
+  
 
 
 
