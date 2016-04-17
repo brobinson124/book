@@ -359,20 +359,24 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
 
-      <div class="container">
-        <nav>
-          <div class="nav-wrapper blue-grey darken-1">
-            <a href="index.html" class="brand-logo right">Music_Together</a>
-            <ul id="nav-mobile" class="left hide-on-med-and-down">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="signup.html">Sign Up!</a></li>
-              <li class="active"><a href="newscore.html">New Score</a></li>
-              <li><a href="friend.html">Find Friends</a></li>
-              <li><a href="login.html">Login</a></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
+     <div id="app-container" class="container">
+</div>
+
+
+<script>
+    // MyComponents is a global object where each property is a reference to a component class
+    MyComponents = {}
+</script>
+
+
+<!-- import each component class in components/ -->
+<!-- The order is important. Dependencies must be loaded first -->
+<script type="text/babel" src="components/navbar.jsx"></script>
+<script type="text/babel" src="components/user.jsx"></script>
+<script type="text/babel" src="components/app.jsx"></script>
+<script type="text/babel" src="data.jsx"></script>
+
+
        
 
        <div class="container">
