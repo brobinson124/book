@@ -359,6 +359,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
 
+<<<<<<< Updated upstream
      <div id="app-container" class="container">
 </div>
 
@@ -377,6 +378,9 @@
 <script type="text/babel" src="data.jsx"></script>
 
 
+=======
+      
+>>>>>>> Stashed changes
        
 
        <div class="container">
@@ -1246,6 +1250,39 @@ var ref = new Firebase("https://musictogether.firebaseio.com/");
     <img id="g42_note" src="img/note.png" style="visibility: hidden; position: fixed; height: 45px; width:50px; top: 131px; left: 570px;"/>
     <!-- 4th quarter note; 2nd bar -->
 
+<!-- play note on click of note from dropdown -->
+    <script>
+      var A = "./soundBytes/pianoNotes/A.wav"
+      function playSound(str, vol) {
+        if (str == "A"){
+          str = = "./soundBytes/pianoNotes/A.wav";
+        }
+        var snd = new Audio();
+        snd.src = str;
+        snd.volume= vol;
+        snd.play();
+      }
+    </script>
+
+    <script>
+      var ref = new Firebase('https://musictogether.firebaseio.com')
+      function playBar(){
+      ref.child('musictogether/first').once('vaule', funciton(snapshot){
+        snapshot.foreach(function(task){
+          var key = task.key()
+          var exists = task.val()
+          if(exists=="yes"){playSound(key,1)
+          }
+        })
+      })
+    }  
+    </script>
+
+    <div>
+      <button onclick="playBar()"><a class = "a note button"><i class = "material-icons left">play_arrow</i></a></button>
+    </div>
+
+      
   </body>
 
 </html>
