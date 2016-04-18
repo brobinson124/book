@@ -17,6 +17,7 @@
       <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
     <script type="text/javascript">
+
     function readDatabase() {
       var topRef = new Firebase("https://musictogether.firebaseio.com/");
 
@@ -378,6 +379,9 @@
 
        <div class="container">
         <img src="score.png" style="position: fixed; top:110px; left:50px; width:900px; clip: rect(0px,605px,200px,0px); ">
+
+        <button class="btn large teal" onClick="clearData()" style="position: fixed; top : 210px; left:100px;">Clear</button>
+
 <!-- FIRST BAR -->
         <div class="container" style="position: fixed; top :80px; left:115px;">
         <!-- Dropdown Trigger -->
@@ -1152,10 +1156,44 @@ var ref = new Firebase("https://musictogether.firebaseio.com/");
     }
 /* 4th quarter note; 2nd bar */
 
+    function clearData() {
+      var ref = new Firebase("https://musictogether.firebaseio.com/");
+
+
+      var firstRef = ref.child("first");
+      var secondRef = ref.child("second");
+      var thirdRef = ref.child("third");
+      var fourthRef = ref.child("fourth");
+      var fifthRef = ref.child("fifth");
+      var sixthRef = ref.child("sixth");
+      var seventhRef = ref.child("seventh");
+      var eighthRef = ref.child("eighth");
+      
+      function getRef (detailRef) {
+        detailRef.once("value", function(snapshot) {
+        var array = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+        var k = 7;
+
+        for (var i = 0; i < 7; i++){
+        var newRef = detailRef.child(array[i]);
+          newRef.set("no");
+        }
+
+      });
+    }
+      getRef(firstRef);
+      getRef(secondRef);
+      getRef(thirdRef);
+      getRef(fourthRef);
+      getRef(fifthRef);
+      getRef(sixthRef);
+      getRef(seventhRef);
+      getRef(eighthRef);
+
+
+
+    }
   
-
-
-
     </script>
     <!-- 1st quarter note; 1st bar -->
     <img id="c_note" src="img/note.png" style="visibility: hidden; position: fixed; height: 45px; width: 50px; top: 115px; left: 100px;"/>
