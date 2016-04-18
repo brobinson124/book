@@ -1283,30 +1283,128 @@ var ref = new Firebase("https://musictogether.firebaseio.com/");
 
 <!-- play note on click of note from dropdown -->
     <script>
-      var A = "./soundBytes/pianoNotes/A.wav"
+      //var A = "./soundBytes/pianoNotes/A.wav"
       function playSound(str, vol) {
-        if (str == "A"){
+        //str = "A";
+        if (str == 'A'){
           str = "./soundBytes/pianoNotes/A.wav";
+        }
+        if (str == 'B'){
+          str = "./soundBytes/pianoNotes/B.wav";
+        }
+        if (str == 'C'){
+          str = "./soundBytes/pianoNotes/C.wav";
+        }
+        if (str == 'D'){
+          str = "./soundBytes/pianoNotes/D.wav";
+        }
+        if (str == 'E'){
+          str = "./soundBytes/pianoNotes/E.wav";
+        }
+        if (str == 'F'){
+          str = "./soundBytes/pianoNotes/F.wav";
+        }
+        if (str == 'G'){
+          str = "./soundBytes/pianoNotes/G.wav";
         }
         var snd = new Audio();
         snd.src = str;
         snd.volume= vol;
         snd.play();
       }
+
     </script>
 
     <script>
       var ref = new Firebase('https://musictogether.firebaseio.com')
       function playBar(){
-      ref.child('musictogether/first').once('vaule', funciton(snapshot){
-        snapshot.foreach(function(task){
-          var key = task.key()
-          var exists = task.val()
-          if(exists=="yes"){playSound(key,1)
-          }
+        ref.child('first').once('value', function(snapshot){
+          snapshot.forEach(function(task){
+            var key = task.key()
+            var exists = task.val()
+            if(exists=="yes"){
+              playSound(key,1)
+            }
+          })
         })
-      })
-    }  
+        setTimeout( function () {
+          ref.child('second').once('value', function(snapshot){
+            snapshot.forEach(function(task){
+              var key = task.key()
+              var exists = task.val()
+              if(exists=="yes"){
+                playSound(key,1)
+              }
+            })
+          })
+          setTimeout( function () {
+            ref.child('third').once('value', function(snapshot){
+              snapshot.forEach(function(task){
+                var key = task.key()
+                var exists = task.val()
+                if(exists=="yes"){
+                  playSound(key,1)
+                }
+              })
+            })
+            setTimeout( function () {
+              ref.child('fourth').once('value', function(snapshot){
+                snapshot.forEach(function(task){
+                  var key = task.key()
+                  var exists = task.val()
+                  if(exists=="yes"){
+                    playSound(key,1)
+                  }
+                })
+              })
+              setTimeout( function () {
+                ref.child('fifth').once('value', function(snapshot){
+                  snapshot.forEach(function(task){
+                    var key = task.key()
+                    var exists = task.val()
+                    if(exists=="yes"){
+                      playSound(key,1)
+                    }
+                  })
+                })
+                setTimeout( function () {
+                  ref.child('sixth').once('value', function(snapshot){
+                    snapshot.forEach(function(task){
+                      var key = task.key()
+                      var exists = task.val()
+                      if(exists=="yes"){
+                        playSound(key,1)
+                      }
+                    })
+                  })
+                  setTimeout( function () {
+                    ref.child('seventh').once('value', function(snapshot){
+                      snapshot.forEach(function(task){
+                        var key = task.key()
+                        var exists = task.val()
+                        if(exists=="yes"){
+                          playSound(key,1)
+                        }
+                      })
+                    })
+                    setTimeout( function () {
+                      ref.child('eighth').once('value', function(snapshot){
+                        snapshot.forEach(function(task){
+                          var key = task.key()
+                          var exists = task.val()
+                          if(exists=="yes"){
+                            playSound(key,1)
+                          }
+                        })
+                      })
+                    }, 500)
+                  }, 500)
+                }, 500)
+              }, 500)
+            }, 500)
+          }, 500)
+        },500)
+      }  
     </script>
 
     <div>
